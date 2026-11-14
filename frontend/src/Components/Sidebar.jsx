@@ -60,8 +60,8 @@ const Sidebar = () => {
       label: 'Nutrition & respiration',
       arabic: 'التغذية والتنفس',
       children: [
-        { label: 'Nutrition', arabic: 'التغذية', path: '/nutrition' },
-        { label: 'Respiration', arabic: 'التنفس', path: '/respiration' },
+        { label: 'Nutrition', arabic: 'التغذية', path: '/nutrition/assessment' },
+        { label: 'Respiration', arabic: 'التنفس', path: '/nutrition/respiration' },
       ],
     },
     {
@@ -82,7 +82,7 @@ const Sidebar = () => {
       {/* Header / Brand */}
       <div className="px-3 pt-2 pb-6">
         <h1 className="text-2xl font-bold tracking-tight text-white">
-          AstroHealth
+          AstroHealth Core
         </h1>
         <p className="text-xs font-medium text-gray-400 mt-1">
           Demonstration build

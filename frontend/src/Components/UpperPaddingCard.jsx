@@ -6,7 +6,7 @@ const UpperPaddingCard = ({ icon, status, name, value, unit, change, updateTime 
   const statusIcon = status === 'normal' ? '✓' : status === 'critical' ? '✕' : status === 'warning' ? '!' : 'i';
 
   return (
-    <div className={`card w-60 rounded-lg shadow-sm p-4 flex flex-col space-y-1 border-2 border-t-[5px] ${statusClass}`}>
+    <div className={`card w-50 rounded-lg shadow-sm p-4 flex flex-col space-y-1 border border-t-[5px] ${statusClass}`}>
       <div className="flex justify-between items-center">
         <span className="bg-[#1D4F9C]/10 text-[#1D4F9C] rounded-lg p-2.5 inline-flex items-center justify-center text-2xl">{icon}</span>
         <div className={`status mt-0 inline-flex items-center rounded-full gap-2 border py-0.5 pl-1 pr-2.5 text-lg font-medium capitalize ${badgeClass}`}>
