@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --color-surface: #EDF2F9;
+  --color-navy: #0A1B33;
+  --color-primary: #1D4F9C;
+  --color-primary-dark: #173F7D;
+  --color-blue: #2F80D1;
+  --color-health: #12805D;
+  --color-health-dark: #0E6A4D;
+  --color-ink: #203040;
+  --color-muted: #566678;
+  --color-line: #D8E0E7;
+}

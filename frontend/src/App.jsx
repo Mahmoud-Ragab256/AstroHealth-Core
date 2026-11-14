@@ -1,19 +1,13 @@
-import { useState } from 'react'
+import router from './router'
+import { RouterProvider } from "react-router-dom";
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-
-      <button
-        type="button"
-        className="counter"
-        onClick={() => setCount((count) => count + 1)}
-      >
-        Count is {count}
-      </button>
-    </>
+    <main>
+      <RouterProvider router={router} />
+    </main>
   )
 }
 
