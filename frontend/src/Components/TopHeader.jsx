@@ -43,7 +43,7 @@ const TopHeader = ({
   return (
     <header className="w-full bg-white border-b border-[#D8E0E7] px-6 md:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
       {/* Left Side: Ship Time & Demonstration Badge */}
-      <div className="flex items-center gap-5">
+      <div className="flex flex-wrap items-center gap-5">
         <div>
           <div className="font-mono font-bold text-[#0A1B33] text-3xl leading-none tracking-tight">
             {hours}:{minutes}
@@ -63,7 +63,7 @@ const TopHeader = ({
       </div>
 
       {/* Right Side: Astronaut Info, Status Badge & Emergency Button */}
-      <div className="flex items-center gap-4 md:gap-5">
+      <div className="flex flex-wrap items-center gap-4 md:gap-5">
         <div className="flex items-center gap-3">
           <div className="h-11 w-11 rounded-full bg-[#EDF2F9] text-[#1D4F9C] flex items-center justify-center text-xl shrink-0">
             👤

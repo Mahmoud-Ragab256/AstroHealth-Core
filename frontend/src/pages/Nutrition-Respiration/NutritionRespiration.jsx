@@ -10,14 +10,11 @@ import {
   Legend,
 } from 'recharts';
 import LeftPaddingCard from '../../Components/LeftPaddingCard';
-import AssessmentSectionCard from '../../Components/AssessmentSectionCard';
+import AssessmentForm from '../../Components/AssessmentForm';
 
 const NutritionRespiration = () => {
-  const [activeStep, setActiveStep] = useState(0);
-  const [formValues, setFormValues] = useState({});
   const [selectedReport, setSelectedReport] = useState(null);
 
-  const steps = ['Measure', 'Validate', 'AI analysis', 'Report'];
 
   const respiratoryVitals = [
     {
@@ -64,40 +61,7 @@ const NutritionRespiration = () => {
     { date: 'Nov 14', spo2: null, rr: null },
   ];
 
-  const respiratoryInputs = [
-    {
-      name: 'spo2',
-      label: 'SpO₂ — pulse oximetry',
-      unit: '%',
-      required: true,
-      hasMultipleCases: true,
-      refRange: '95–100 %',
-    },
-    {
-      name: 'respiratoryRate',
-      label: 'Respiratory Rate',
-      unit: 'breaths/min',
-      required: true,
-      hasMultipleCases: true,
-      refRange: '12–20 breaths/min',
-    },
-    {
-      name: 'pao2',
-      label: 'PaO₂ (when available)',
-      unit: 'mmHg',
-      required: false,
-      hasMultipleCases: true,
-      refRange: '75–100 mmHg',
-    },
-    {
-      name: 'paco2',
-      label: 'PaCO₂ (when available)',
-      unit: 'mmHg',
-      required: false,
-      hasMultipleCases: true,
-      refRange: '35–45 mmHg',
-    },
-  ];
+
 
   const previousReports = [
     {
@@ -114,19 +78,6 @@ const NutritionRespiration = () => {
       },
     },
   ];
-
-  const handleInputChange = (fieldName, newValue) => {
-    setFormValues((prev) => ({
-      ...prev,
-      [fieldName]: newValue,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Submitted Respiratory Measurements:', formValues);
-    setActiveStep(1);
-  };
 
   // SVG Donut Gauge calculation for 98%
   const radius = 44;
@@ -300,70 +251,7 @@ const NutritionRespiration = () => {
       </section>
 
       {/* 3. New Respiratory Assessment Section */}
-      <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-        <h2 className="text-lg font-bold text-[#0A1B33]">
-          New Respiratory Assessment
-        </h2>
-
-        {/* Stepper Bar */}
-        <div className="rounded-2xl bg-white border border-gray-300 shadow-sm px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
-          {steps.map((step, index) => {
-            const isActive = index === activeStep;
-            const isCompleted = index < activeStep;
-            const stepNumber = String(index + 1).padStart(2, '0');
-
-            return (
-              <button
-                key={step}
-                type="button"
-                onClick={() => setActiveStep(index)}
-                className="inline-flex items-center gap-2.5 cursor-pointer"
-              >
-                <span
-                  className={`h-7 w-7 rounded-full inline-flex items-center justify-center text-xs font-mono font-bold transition-colors ${isActive || isCompleted
-                    ? 'bg-[#0A1B33] text-white'
-                    : 'bg-gray-100 text-gray-500 border border-gray-300'
-                    }`}
-                >
-                  {isCompleted ? '✓' : stepNumber}
-                </span>
-                <span
-                  className={`text-sm font-bold ${isActive ? 'text-[#0A1B33]' : 'text-gray-500'
-                    }`}
-                >
-                  {step}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Assessment Card */}
-        <AssessmentSectionCard
-          title="Respiratory Measurements"
-          arabicTitle="القياسات التنفسية"
-          infoText="Critical respiratory values follow the emergency protocol independently of the AI assessment."
-          inputs={respiratoryInputs}
-          values={formValues}
-          onChange={handleInputChange}
-          onEditRange={(input) => console.log('Edit range for:', input.name)}
-        />
-
-        {/* Submit Action */}
-        <div className="space-y-2 pt-1">
-          <button
-            type="submit"
-            className="bg-[#346E9E] hover:bg-[#285880] text-white font-semibold text-base px-7 py-3.5 rounded-full inline-flex items-center gap-2.5 transition-colors cursor-pointer shadow-sm"
-          >
-            <span>➤</span>
-            <span>Submit Measurements</span>
-          </button>
-
-          <p className="text-xs text-[#566678]">
-            Fields marked * are required. Measurements are sent to the Express API for analysis.
-          </p>
-        </div>
-      </form>
+      <AssessmentForm type="respiration" title="Respiratory measurements" />
 
       {/* 4. Previous Respiratory Reports */}
       <section className="space-y-3">

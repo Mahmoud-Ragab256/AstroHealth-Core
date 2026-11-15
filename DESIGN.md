@@ -1,0 +1,66 @@
+---
+version: alpha
+name: AstroHealth
+description: Existing mission health dashboard and assessment forms.
+colors:
+  primary: "#1D4F9C"
+  navy: "#0A1B33"
+  surface: "#EDF2F9"
+  ink: "#203040"
+  muted: "#566678"
+  line: "#D8E0E7"
+typography:
+  sans:
+    fontFamily: '"Atkinson Hyperlegible", system-ui, sans-serif'
+rounded:
+  card: "1.5rem"
+  input: "1rem"
+spacing:
+  section-gap: "1.5rem"
+components:
+  form: {}
+  input: {}
+  report: {}
+---
+
+# AstroHealth Design System
+
+## Overview
+Preserve the existing mission dashboard: navy navigation, pale workspace,
+white assessment cards, English controls and existing Arabic page subtitles.
+This is a product workflow for entering measurements and reading model reports.
+Do not invent clinical results, normal ranges, or astronaut identities.
+Runtime tokens in `frontend/src/styles/index.css` remain canonical; this file
+mirrors them. Existing banners and surrounding layouts remain in place.
+
+## Colors
+Use primary for actions, navy/ink for headings, muted for help, and line for
+borders. Saved state uses the existing health token. Error text is red with a
+written message; color never conveys status alone.
+
+## Typography
+Use the runtime sans stack. Headings stay bold; values and unit descriptions
+remain readable at the existing 14–16px body scale. Arabic subtitles use RTL.
+
+## Layout
+AssessmentSectionCard uses one field column on mobile and two at medium widths.
+Units appear below controls so long assay units do not overlap typed values.
+Maintain the inherited sidebar, banners, and 24px section gaps.
+
+## Elevation & Depth
+White cards, restrained borders, and existing small shadows. No new overlays.
+
+## Shapes
+Reuse rounded cards, rounded inputs, and pill-shaped primary actions.
+
+## Components
+AssessmentForm owns all five submission workflows. AssessmentSectionCard and
+LabInput own field layout and label activation. SavedReport owns persisted
+report presentation; model output renders as text and structured lists.
+
+## Motion
+Use existing short color transitions. No decorative motion in assessment forms.
+
+## Accessibility
+Use native numeric inputs, linked labels, visible focus, error live regions,
+and disabled pending controls. Tables scroll within their container on mobile.

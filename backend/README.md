@@ -52,7 +52,8 @@ Example respiration request:
   `basophils_absolute`, `gamma_h2ax`, `comet_assay`, `micronucleus_assay`,
   `radiation_type`, `exposure_duration`.
 
-Units for the three new tests are in `src/assessmentFields.js`. In particular,
+Units for all five tests are in `../shared/assessmentFields.js`, re-exported from
+`src/assessmentFields.js`. The frontend imports the same definitions. In particular,
 `bmd_t_score` is not density in g/cm², muscle mass/strength are relative to
 baseline, and `orthostatic_tolerance` is seconds. The sheet specifies body weight
 as kg / % change and several assays without fixed units: the frontend and model
@@ -87,8 +88,11 @@ Errors: **400** invalid input; **502** model failure/invalid JSON;
 **504** model timeout (30 seconds); **500** report persistence failure.
 Model failures do not create reports. A failed save never returns success.
 
-The existing frontend forms are not wired by this backend change. Callers must
-submit the documented JSON (including metadata) and await the returned report.
+The frontend forms submit this JSON, omit blank measurements, and navigate to
+the saved report. Vite proxies same-origin `/api` requests to this backend.
+`GET /api/reports/:id` returns `{ report }` and supports refreshing a report page.
+`GET /api/reports?astronaut_id=AST-001` returns `{ reports }`, newest first,
+limited to 100 records for the requested astronaut.
 
 ## Verification
 

@@ -1,0 +1,6 @@
+{
+  "profile": "product-admin",
+  "sourceRoots": ["frontend/src"],
+  "canonicalMap": "UX-CONTRACT.md",
+  "ownership": { "Select/Listbox": "native", "Date": "native" }
+}

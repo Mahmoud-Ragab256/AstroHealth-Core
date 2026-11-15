@@ -15,6 +15,28 @@ async function invoke(handler, body) {
   return res;
 }
 
+test('report lookup rejects invalid IDs and distinguishes missing reports', async t => {
+  const res = { status(code) { this.code = code; return this; }, json(payload) { this.payload = payload; return this; } };
+  await endpoints.getReport({ params: { id: 'invalid' } }, res);
+  assert.equal(res.code, 400);
+  t.mock.method(Report, 'findById', () => ({ lean: async () => null }));
+  await endpoints.getReport({ params: { id: '012345678901234567890123' } }, res);
+  assert.equal(res.code, 404);
+});
+
+test('report history is scoped to an astronaut and bounded', async t => {
+  const reports = [{ _id: 'saved' }];
+  t.mock.method(Report, 'find', query => {
+    assert.deepEqual(query, { 'astronaut.id': 'AST-001' });
+    return { sort: () => ({ limit: limit => { assert.equal(limit, 100); return { lean: async () => reports }; } }) };
+  });
+  const res = { status(code) { this.code = code; return this; }, json(payload) { this.payload = payload; return this; } };
+  await endpoints.listReports({ query: {} }, res);
+  assert.equal(res.code, 400);
+  await endpoints.listReports({ query: { astronaut_id: 'AST-001' } }, res);
+  assert.deepEqual(res.payload.reports, reports);
+});
+
 const cases = [
   ['gravity', Object.fromEntries(gravityFields.map(f => [f.key, -1]))],
   ['respiration', Object.fromEntries(respirationFields.map(f => [f.key, 1]))],

@@ -20,8 +20,8 @@ import GravityAssessment from '../pages/Gravity/Assessment';
 import GravityExercises from '../pages/Gravity/Exercises';
 import NutritionAssessment from '../pages/Nutrition-Respiration/NutritionAssessment';
 import NutritionRespiration from '../pages/Nutrition-Respiration/NutritionRespiration';
-import HistoryReports from '../pages/HistoryReports';
-import ReportDetail from '../pages/ReportDetail';
+import HistoryReports from '../pages/SavedReportHistory';
+import ReportDetail from '../pages/SavedReportDetail';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

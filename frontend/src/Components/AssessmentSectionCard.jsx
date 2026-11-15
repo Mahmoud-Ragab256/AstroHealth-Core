@@ -22,7 +22,10 @@ const AssessmentSectionCard = ({ title, arabicTitle, inputs = [], values = {}, o
             key={input.name}
             label={input.label}
             required={input.required}
-            value={values[input.name] || ''}
+            value={values[input.name] ?? ''}
+            name={input.name}
+            step={input.step}
+            min={input.min}
             onChange={(e) => onChange(input.name, e.target.value)}
             unit={input.unit}
             placeholder={input.placeholder}

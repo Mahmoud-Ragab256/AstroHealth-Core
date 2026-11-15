@@ -79,7 +79,7 @@ const Sidebar = () => {
     }`;
 
   return (
-    <aside className="w-72 shrink-0 bg-[#0A1B33] text-white h-screen sticky top-0 p-5 flex flex-col select-none">
+    <aside className="w-full lg:w-72 shrink-0 bg-[#0A1B33] text-white lg:h-screen lg:sticky top-0 p-5 flex flex-col select-none">
       {/* Header / Brand */}
       <div className="px-3 pt-2 pb-6">
         <h1 className="text-2xl font-bold tracking-tight text-white">

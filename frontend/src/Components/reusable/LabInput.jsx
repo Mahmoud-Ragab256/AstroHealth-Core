@@ -1,4 +1,9 @@
+import { useId } from 'react';
+
 const LabInput = ({
+  name,
+  step,
+  min,
   label,
   required,
   value,
@@ -12,15 +17,18 @@ const LabInput = ({
   refNote = "(demo default)",
   onEditRange,
 }) => {
+  const id = useId();
   return (
     <div className="w-full flex flex-col space-y-2">
-      <label className="text-base font-medium text-[#203040]">
+      <label htmlFor={id} className="text-base font-medium text-[#203040]">
         {label} {required && <span className="text-red-500 font-bold">*</span>}
       </label>
 
       <div className="relative flex items-center w-full">
         {type === "select" ? (
           <select
+            id={id}
+            name={name}
             value={value}
             onChange={onChange}
             required={required}
@@ -37,22 +45,22 @@ const LabInput = ({
           </select>
         ) : (
           <input
+            id={id}
+            name={name}
+            step={step}
+            min={min}
+            aria-describedby={unit ? `${id}-unit` : undefined}
             type={type}
             value={value}
             onChange={onChange}
             placeholder={placeholder}
             required={required}
-            className={`w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 ${unit ? "pr-24" : ""
-              } text-base text-gray-900 focus:border-[#1D4F9C] focus:outline-none transition-colors`}
+            className="w-full rounded-2xl border border-gray-300 bg-white px-4 py-3 text-base text-gray-900 focus:border-[#1D4F9C] focus:outline-none focus:ring-2 focus:ring-primary/30 transition-colors"
           />
         )}
 
-        {unit && type !== "select" && (
-          <span className="absolute right-4 text-base font-medium text-gray-500 pointer-events-none">
-            {unit}
-          </span>
-        )}
       </div>
+      {unit && <span id={`${id}-unit`} className="text-sm text-muted">Unit: {unit}</span>}
 
       {hasMultipleCases && (
         <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500 pt-0.5">

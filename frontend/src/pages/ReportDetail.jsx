@@ -297,7 +297,7 @@ export default function ReportDetail({ reports = initialReports, onAmendReport }
                 placeholder="Enter clinical justification or telemetry correction details..."
                 value={amendmentNote}
                 onChange={(e) => setAmendmentNote(e.target.value)}
-                className="w-full rounded-2xl border border-gray-300 p-3.5 text-xs text-gray-900 focus:border-[#1D4F9C] focus:outline-none"
+                className="resize-none w-full rounded-2xl border border-gray-300 p-3.5 text-xs text-gray-900 focus:border-[#1D4F9C] focus:outline-none"
               />
               {formError && <p role="alert" className="text-xs font-bold text-red-600">{formError}</p>}
             </div>

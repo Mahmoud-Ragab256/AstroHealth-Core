@@ -9,6 +9,8 @@
   "type": "module",
   "main": "vite.config.js",
   "scripts": {
+    "test": "node --test tests/assessment-payload.test.js",
+    "test:browser": "node tests/browser-smoke.mjs",
     "dev": "vite",
     "server": "json-server db.json --port 3000",
     "build": "vite build",

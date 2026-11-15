@@ -1,47 +1,39 @@
 import Measurement from './mongo/models/Measurement.js';
 import Report from './mongo/models/Report.js';
 import { assessmentHandler } from './assessmentHandler.js';
-import { gravityFields, respirationFields, nutritionFields } from './assessmentFields.js';
-
-const psychologicalFields = [
-  { key: 'sleep_duration', name: 'Sleep Duration', unit: 'hours' },
-  { key: 'sleep_efficiency', name: 'Sleep Efficiency', unit: '%' },
-  { key: 'sleep_latency', name: 'Sleep Latency', unit: 'minutes' },
-  { key: 'awakenings', name: 'Awakenings', unit: 'count/night' },
-  { key: 'mood_score', name: 'Mood Score', unit: '1–10' },
-  { key: 'stress_score', name: 'Stress Score', unit: '0–100' },
-  { key: 'phq_9', name: 'PHQ-9', unit: 'score / 27' },
-  { key: 'attention', name: 'Attention', unit: '%' },
-  { key: 'memory', name: 'Memory', unit: '%' },
-  { key: 'decision_making', name: 'Decision Making', unit: '%' },
-  { key: 'reaction_time', name: 'Reaction Time', unit: 'ms' },
-  { key: 'sleep_quality', name: 'Sleep Quality', unit: 'score' }
-];
-
-
-const radiationFields = [
-  { key: 'absorbed_dose', name: 'Absorbed Dose', unit: 'Gy' },
-  { key: 'equivalent_dose', name: 'Equivalent Dose', unit: 'Sv' },
-  { key: 'effective_dose', name: 'Effective Dose', unit: 'Sv' },
-  { key: 'cumulative_radiation_dose', name: 'Cumulative Radiation Dose', unit: 'Sv' },
-  { key: 'wbc', name: 'WBC', unit: 'cells/µL' },
-  { key: 'neutrophils_absolute', name: 'Neutrophils (absolute)', unit: '10^9/L' },
-  { key: 'lymphocytes_absolute', name: 'Lymphocytes (absolute)', unit: '10^9/L' },
-  { key: 'monocytes_absolute', name: 'Monocytes (absolute)', unit: '10^9/L' },
-  { key: 'eosinophils_absolute', name: 'Eosinophils (absolute)', unit: '10^9/L' },
-  { key: 'basophils_absolute', name: 'Basophils (absolute)', unit: '10^9/L' },
-  { key: 'gamma_h2ax', name: 'γ-H2AX', unit: 'assay-specific' },
-  { key: 'comet_assay', name: 'Comet Assay', unit: 'assay-specific' },
-  { key: 'micronucleus_assay', name: 'Micronucleus Assay', unit: 'assay-specific' },
-  { key: 'radiation_type', name: 'Radiation Type', unit: 'categorical' },
-  { key: 'exposure_duration', name: 'Exposure Duration', unit: 'time' }
-];
+import { gravityFields, respirationFields, nutritionFields, psychologicalFields, radiationFields } from './assessmentFields.js';
 
 export const psychological = assessmentHandler('psychological', psychologicalFields);
 export const radiation = assessmentHandler('radiation', radiationFields);
 export const gravity = assessmentHandler('gravity', gravityFields);
 export const respiration = assessmentHandler('respiration', respirationFields);
 export const nutrition = assessmentHandler('nutrition', nutritionFields);
+
+export const getReport = async (req, res) => {
+  if (!/^[a-f\d]{24}$/i.test(req.params.id)) {
+    return res.status(400).json({ message: 'Invalid report ID' });
+  }
+  try {
+    const report = await Report.findById(req.params.id).lean();
+    if (!report) return res.status(404).json({ message: 'Report not found' });
+    return res.json({ report });
+  } catch {
+    return res.status(500).json({ message: 'Could not load the report' });
+  }
+};
+
+export const listReports = async (req, res) => {
+  if (typeof req.query.astronaut_id !== 'string' || !req.query.astronaut_id.trim()) {
+    return res.status(400).json({ message: 'astronaut_id is required' });
+  }
+  try {
+    const reports = await Report.find({ 'astronaut.id': req.query.astronaut_id })
+      .sort({ createdAt: -1 }).limit(100).lean();
+    return res.json({ reports });
+  } catch {
+    return res.status(500).json({ message: 'Could not load reports' });
+  }
+};
 
 export const analytics = async (req, res) => {
   try {
@@ -77,5 +69,3 @@ export const analytics = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 }
-
-
