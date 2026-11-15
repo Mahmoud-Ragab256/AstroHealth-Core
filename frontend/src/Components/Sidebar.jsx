@@ -72,13 +72,14 @@ const Sidebar = () => {
   ];
 
   const getLinkClass = ({ isActive }) =>
-    `block rounded-2xl px-5 py-3 transition-colors ${isActive
-      ? 'bg-[#1D4F9C] text-white'
-      : 'text-white hover:bg-white/5'
+    `block rounded-2xl px-5 py-3 transition-colors ${
+      isActive
+        ? 'bg-[#1D4F9C] text-white'
+        : 'text-white hover:bg-white/5'
     }`;
 
   return (
-    <aside className="w-72 shrink-0 bg-[#0A1B33] text-white min-h-screen p-5 flex flex-col select-none">
+    <aside className="w-72 shrink-0 bg-[#0A1B33] text-white h-screen sticky top-0 p-5 flex flex-col select-none">
       {/* Header / Brand */}
       <div className="px-3 pt-2 pb-6">
         <h1 className="text-2xl font-bold tracking-tight text-white">
@@ -90,7 +91,7 @@ const Sidebar = () => {
       </div>
 
       {/* Navigation Links */}
-      <nav className="flex-1 space-y-1.5 overflow-y-auto">
+      <nav className="flex-1 space-y-1.5 overflow-y-auto custom-scrollbar pr-2">
         {navItems.map((item) => {
           if (item.children) {
             const isOpen = openMenus[item.key];

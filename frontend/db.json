@@ -1,0 +1,23 @@
+
+{
+  "radiationMeasurements": [
+    {
+      "id": "1",
+      "absorbedDose": 0,
+      "equivalentDose": 0,
+      "effectiveDose": 0,
+      "cumulativeRadiationDose": 0,
+      "wbc": 0,
+      "neutrophilsAbsolute": 0,
+      "lymphocytesAbsolute": 0,
+      "monocytesAbsolute": 0,
+      "eosinophilsAbsolute": 0,
+      "basophilsAbsolute": 0,
+      "gammaH2AX": "",
+      "cometAssay": "",
+      "micronucleusAssay": "",
+      "radiationType": "",
+      "exposureDuration": 0
+    }
+  ]
+}

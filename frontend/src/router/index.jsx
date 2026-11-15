@@ -21,6 +21,7 @@ import GravityExercises from '../pages/Gravity/Exercises';
 import NutritionAssessment from '../pages/Nutrition-Respiration/NutritionAssessment';
 import NutritionRespiration from '../pages/Nutrition-Respiration/NutritionRespiration';
 import HistoryReports from '../pages/HistoryReports';
+import ReportDetail from '../pages/ReportDetail';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -56,7 +57,9 @@ const router = createBrowserRouter(
           <Route path="respiration" element={<NutritionRespiration />} />
         </Route>
 
+        {/* نقلنا صفحات التقارير جوا الـ MainLayout عشان تظهر معاهم القائمة الجانبية */}
         <Route path="reports" element={<HistoryReports />} />
+        <Route path="reports/:id" element={<ReportDetail />} />
       </Route>
     </>
   )
