@@ -16,8 +16,7 @@ mission, and day. Blank measurements are omitted; zero and negative numbers are
 preserved. At least one measurement is required. All numeric inputs allow decimals
 except mission day. Clinical ranges are interpreted by the external model.
 
-Do not use demo identity values in real requests. Capture actual metadata in the
-form; do not persist health inputs to browser storage. Reuse the field definitions
+Do not use demo identity values in real requests. Read actual metadata from the saved astronaut profile; do not persist health inputs to browser storage. Reuse the field definitions
 across backend and frontend rather than maintaining separate mappings.
 
 On submit, prevent duplicate activation and lock the form until the request
@@ -30,3 +29,18 @@ Reports history requires an astronaut ID and shows up to 100 real database
 reports. Existing static report examples remain source fixtures, not live records.
 No authentication contract is introduced by this integration; existing deployment
 access controls still apply.
+
+## Profile and psychological workflows
+
+Assessment metadata comes from astronautData in localStorage. The /profile
+page saves mission and day once and preserves existing profile fields. Never
+overwrite the saved profile on application mount. Missing settings block
+submission with a link to setup. Reports use the saved astronaut ID.
+
+Psychological navigation has distinct headings and compact banners. The PHQ-9
+uses nine labelled radio groups, an answered count, explicit score calculation,
+and an independent question-9 follow-up message. Answers remain in memory; only
+the calculated score accompanies an assessment submission. Screening and AI
+results remain distinct. Puzzles use inline panels, explicit answer confirmation,
+keyboard focus transitions, memory preview, and 10 points per correct answer.
+Only completed sessions persist; double activation cannot award extra points.

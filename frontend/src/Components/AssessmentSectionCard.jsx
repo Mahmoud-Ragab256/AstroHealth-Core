@@ -1,11 +1,11 @@
 import LabInput from './reusable/LabInput';
 
-const AssessmentSectionCard = ({ title, arabicTitle, inputs = [], values = {}, onChange, onEditRange }) => {
+const AssessmentSectionCard = ({ title, description, arabicTitle, inputs = [], values = {}, onChange, onEditRange }) => {
 
   return (
     <div className="card w-full shadow-sm flex flex-col p-6 md:p-8 rounded-3xl border border-gray-300 bg-white space-y-6">
       <div className="flex flex-wrap items-baseline gap-3">
-        <h2 className="font-bold text-gray-900 text-2xl md:text-3xl leading-snug">
+        <h2 className="font-bold text-navy text-xl md:text-2xl leading-snug">
           {title}
         </h2>
 
@@ -15,6 +15,7 @@ const AssessmentSectionCard = ({ title, arabicTitle, inputs = [], values = {}, o
           </span>
         )}
       </div>
+      {description && <p className="text-sm leading-relaxed text-muted">{description}</p>}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
         {inputs.map((input) => (

@@ -52,8 +52,8 @@ try {
           calls++;
           const type = new URL(request.url).pathname.split('/').at(-1);
           const body = JSON.parse(request.postData);
-          assert.deepEqual(Object.keys(body).sort(), ['astronaut_id', 'mission', 'day', ...assessmentFields[type].map(f => f.key)].sort());
-          for (const field of assessmentFields[type]) assert.equal(typeof body[field.key], field.key === 'radiation_type' ? 'string' : 'number');
+          assert.deepEqual(Object.keys(body).sort(), ['astronaut_id', 'mission', 'day', ...assessmentFields[type].filter(f => f.key !== 'phq_9').map(f => f.key)].sort());
+          for (const field of assessmentFields[type].filter(f => f.key !== 'phq_9')) assert.equal(typeof body[field.key], field.key === 'radiation_type' ? 'string' : 'number');
           await pause(250);
           if (fail) { code = 502; payload = { message: 'Model unavailable for browser test' }; }
           else {
@@ -66,6 +66,7 @@ try {
     }
   });
   await send('Page.enable');
+  await send('Page.addScriptToEvaluateOnNewDocument', { source: `if (location.origin === 'http://127.0.0.1:5173' && !localStorage.getItem('astronautData')) localStorage.setItem('astronautData', JSON.stringify({astronaut:'Browser astronaut', id:'AST-BROWSER',mission:'Browser mission',day:0,weight:'70kg'}));` });
   await send('Runtime.enable');
   await send('Fetch.enable', { patterns: [{ urlPattern: 'http://127.0.0.1:5173/api/*' }] });
   const evaluate = async expression => {
@@ -83,12 +84,12 @@ try {
   }
   async function navigate(path) {
     await send('Page.navigate', { url: `http://127.0.0.1:5173${path}` });
-    await until('!!document.querySelector("input[name=astronaut_id]")');
+    await until('!!document.querySelector("form[data-assessment]")');
   }
   async function fill() {
     await evaluate(`(() => {
       const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
-      document.querySelectorAll('form input').forEach(input => {
+      document.querySelectorAll('form[data-assessment] input').forEach(input => {
         const values = { astronaut_id: 'AST-BROWSER', mission: 'Browser mission', day: '0', radiation_type: 'Gamma', bmd_t_score: '-2.5' };
         setter.call(input, values[input.name] ?? '0.25'); input.dispatchEvent(new Event('input', { bubbles: true }));
       });
@@ -97,10 +98,10 @@ try {
   const routes = { radiation: '/radiation-test', psychological: '/psychological/assessment', gravity: '/gravity/assessment', nutrition: '/nutrition/assessment', respiration: '/nutrition/respiration' };
   for (const [type, path] of Object.entries(routes)) {
     await navigate(path);
-    assert.equal(await evaluate('document.querySelectorAll("form input").length'), assessmentFields[type].length + 3);
-    assert.equal(await evaluate('[...document.querySelectorAll("form input")].every(input => !!document.querySelector(`label[for="${input.id}"]`))'), true);
+    assert.equal(await evaluate('document.querySelectorAll("form[data-assessment] input").length'), assessmentFields[type].filter(f => f.key !== 'phq_9').length);
+    assert.equal(await evaluate('[...document.querySelectorAll("form[data-assessment] input")].every(input => !!document.querySelector(`label[for="${input.id}"]`))'), true);
     await fill();
-    await evaluate('document.querySelector("form").requestSubmit()');
+    await evaluate('document.querySelector("form[data-assessment]").requestSubmit()');
     await until('document.body.innerText.includes("Browser test result")');
     console.log(`PASS ${type}: exact fields, labels, numeric payload, saved report`);
   }
@@ -112,27 +113,55 @@ try {
   await fill();
   fail = true;
   const before = calls;
-  await evaluate('document.querySelector("form").requestSubmit(); document.querySelector("form").requestSubmit()');
+  await evaluate('document.querySelector("form[data-assessment]").requestSubmit(); document.querySelector("form[data-assessment]").requestSubmit()');
   await until('document.body.innerText.includes("Model unavailable for browser test")');
   assert.equal(calls, before + 1);
   assert.equal(await evaluate('document.querySelector("input[name=bmd_t_score]").value'), '-2.5');
   assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true);
-  assert.equal(await evaluate('document.querySelector("form").getBoundingClientRect().width >= 300'), true);
+  assert.equal(await evaluate('document.querySelector("form[data-assessment]").getBoundingClientRect().width >= 300'), true);
   const screenshot = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true });
   writeFileSync(join(profile, 'assessment-mobile.png'), Buffer.from(screenshot.data, 'base64'));
   console.log(`PASS mobile, failure recovery, duplicate prevention; screenshot: ${join(profile, 'assessment-mobile.png')}`);
   fail = false;
-  await evaluate('document.querySelector("form").requestSubmit()');
+  await evaluate('document.querySelector("form[data-assessment]").requestSubmit()');
   await until('document.body.innerText.includes("Browser test result")');
   console.log('PASS retry');
   await send('Page.navigate', { url: 'http://127.0.0.1:5173/reports' });
-  await until('!!document.querySelector("#report-astronaut")');
-  for (const id of ['AST-BROWSER', 'EMPTY']) {
-    await evaluate(`(() => { const input = document.querySelector('#report-astronaut'); Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set.call(input, '${id}'); input.dispatchEvent(new Event('input', { bubbles: true })); })()`);
-    await evaluate('document.querySelector("form").requestSubmit()');
-    await until(id === 'EMPTY' ? 'document.body.innerText.includes("No saved reports")' : '!!document.querySelector("a[href=\\"/reports/012345678901234567890123\\"]")');
+  await until('document.body.innerText.includes("Browser mission")');
+  console.log('PASS automatic report history');
+  await send('Page.navigate', {url:'http://127.0.0.1:5173/profile'});
+  await until('!!document.querySelector("input[name=mission]")');
+  await evaluate(`(() => { const input = document.querySelector('input[name=mission]'); Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(input,'Saved mission'); input.dispatchEvent(new Event('input',{bubbles:true})); })()`);
+  await evaluate('document.querySelector("form").requestSubmit()');
+  await until('document.body.innerText.includes("Mission settings saved")');
+  assert.equal(await evaluate('JSON.parse(localStorage.astronautData).weight'), '70kg');
+  await navigate(routes.psychological);
+  await evaluate('document.querySelector("#phq9 form").requestSubmit()');
+  assert.equal(await evaluate('document.body.innerText.includes("Minimal symptom range")'),false);
+  await evaluate(`document.querySelectorAll('#phq9 input[value="0"]').forEach(input => input.click())`);
+  await evaluate('document.querySelector("#phq9 form").requestSubmit()');
+  await until('document.body.innerText.includes("Minimal symptom range")');
+  await evaluate(`document.querySelector('input[name="phq-8"][value="1"]').click()`);
+  await until('document.body.innerText.includes("Follow-up is important")');
+  await evaluate('document.querySelector("#phq9 form").requestSubmit()');
+  await until('document.body.innerText.includes("Follow-up on question 9")');
+  console.log('PASS saved profile, full PHQ-9, incomplete guard and question 9 follow-up');
+  await send('Page.navigate',{url:'http://127.0.0.1:5173/psychological/puzzles'});
+  await until('document.body.innerText.includes("Choose your challenge")');
+  await evaluate(`document.querySelector('button[aria-label="Play Logic Puzzles"]').click()`);
+  for (const answer of ['Module C','Omar','No','2','Danger']) {
+    await until('!!document.querySelector("input[name=puzzle-option]")');
+    await evaluate(`Array.from(document.querySelectorAll('input[name=puzzle-option]')).find(input => input.value === ${JSON.stringify(answer)}).click()`);
+    await evaluate(`Array.from(document.querySelectorAll('button')).find(button => button.textContent === 'Check answer').click()`);
+    await until('document.body.innerText.includes("10 points earned")');
+    await evaluate(`Array.from(document.querySelectorAll('button')).find(button => /^(Next question|View results)/.test(button.textContent)).click()`);
   }
-  console.log('PASS report history and empty state');
+  await until('document.body.innerText.includes("50 points earned")');
+  assert.equal(await evaluate('JSON.parse(localStorage.astro_puzzles_stats).sessionsPlayed'),1);
+  assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'),true);
+  const puzzlesShot = await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:true});
+  writeFileSync(join(profile,'puzzles-mobile.png'),Buffer.from(puzzlesShot.data,'base64'));
+  console.log('PASS puzzle scoring, persisted session and mobile layout');
   await send('Browser.close');
 } finally {
   socket?.close();

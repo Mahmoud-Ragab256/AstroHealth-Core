@@ -1,8 +1,8 @@
-const PageHeader = ({ bannerImage, tag, step, title, arabicTitle, description }) => {
+const PageHeader = ({ bannerImage, tag, step, title, arabicTitle, description, compact = false }) => {
 
   return (
     <div className="card w-full shadow-sm flex flex-col p-0 rounded-3xl border border-gray-300 overflow-hidden bg-white space-y-0">
-      <div className="relative h-64 md:h-80 w-full bg-[#0A1B33] flex items-center justify-center">
+      <div className={`relative ${compact ? 'h-36 md:h-44' : 'h-64 md:h-80'} w-full bg-[#0A1B33] flex items-center justify-center`}>
         {bannerImage && (
           <img src={bannerImage} alt={title} className="w-full h-full object-cover" />
         )}

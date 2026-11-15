@@ -2,9 +2,11 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Sidebar from '../Components/Sidebar';
 import TopHeader from '../Components/TopHeader';
+import useAstronautProfile from '../hooks/useAstronautProfile';
 
 const RootLayout = () => {
   const navigate = useNavigate();
+  const profile = useAstronautProfile();
   const [navigationOpen, setNavigationOpen] = useState(false);
 
   return (
@@ -18,9 +20,10 @@ const RootLayout = () => {
 
       <div className="flex-1 flex flex-col min-w-0">
         <TopHeader
-          astronautId="AST-0427 (demo)"
-          missionDay={142}
-          status="warning"
+          astronautId={profile.astronaut || profile.id || 'No astronaut selected'}
+          missionDay={profile.day === '' || profile.day == null ? 'Not set' : profile.day}
+          badgeText={profile.mission || 'Mission not configured'}
+          status="not assessed"
           onEmergency={() => navigate('/emergency/measurements')}
         />
 

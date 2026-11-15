@@ -64,3 +64,18 @@ Use existing short color transitions. No decorative motion in assessment forms.
 ## Accessibility
 Use native numeric inputs, linked labels, visible focus, error live regions,
 and disabled pending controls. Tables scroll within their container on mobile.
+
+## Profile and psychological workflows
+
+Assessment metadata comes from astronautData in localStorage. The /profile
+page saves mission and day once and preserves existing profile fields. Never
+overwrite the saved profile on application mount. Missing settings block
+submission with a link to setup. Reports use the saved astronaut ID.
+
+Psychological navigation has distinct headings and compact banners. The PHQ-9
+uses nine labelled radio groups, an answered count, explicit score calculation,
+and an independent question-9 follow-up message. Answers remain in memory; only
+the calculated score accompanies an assessment submission. Screening and AI
+results remain distinct. Puzzles use inline panels, explicit answer confirmation,
+keyboard focus transitions, memory preview, and 10 points per correct answer.
+Only completed sessions persist; double activation cannot award extra points.

@@ -22,6 +22,7 @@ import NutritionAssessment from '../pages/Nutrition-Respiration/NutritionAssessm
 import NutritionRespiration from '../pages/Nutrition-Respiration/NutritionRespiration';
 import HistoryReports from '../pages/SavedReportHistory';
 import ReportDetail from '../pages/SavedReportDetail';
+import ProfileSettings from '../pages/ProfileSettings';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -59,6 +60,7 @@ const router = createBrowserRouter(
 
         {/* نقلنا صفحات التقارير جوا الـ MainLayout عشان تظهر معاهم القائمة الجانبية */}
         <Route path="reports" element={<HistoryReports />} />
+        <Route path="profile" element={<ProfileSettings />} />
         <Route path="reports/:id" element={<ReportDetail />} />
       </Route>
     </>

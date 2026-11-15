@@ -23,8 +23,9 @@ For production, configure the hosting reverse proxy to route `/api/*` to Express
 
 All five assessment forms use `../shared/assessmentFields.js` for keys, labels,
 and units. They require astronaut ID, mission, day, and at least one measurement.
-Metadata is entered explicitly because this demo has no authenticated astronaut
-profile. Blank measurements are omitted, not sent as null or zero. Pending
+Metadata comes from `localStorage.astronautData`. Configure the astronaut ID,
+mission and day once at `/profile`; existing name, weight and sex are preserved.
+This browser profile is not authentication. Blank measurements are omitted, not sent as null or zero. Pending
 submissions are locked; errors preserve inputs. Successful submissions navigate
 to the saved report, which can be refreshed without re-submitting the assessment.
 
@@ -40,3 +41,14 @@ Verification:
   Chrome or Edge installed (or set `BROWSER_PATH`). This uses mocked API responses
   and checks all five forms, report refresh, failure recovery, duplicate
   prevention, and a mobile viewport. It does not write to MongoDB.
+
+## Wellbeing and practice
+
+PHQ-9 presents all nine questions, requires complete answers, and computes a
+0?27 screening score. Individual answers are held in memory only; a calculated
+score is included as `phq_9` when the psychological measurements are submitted.
+This is distinct from model predictions. Question 9 triggers follow-up guidance
+independent of the total. Sources: [questionnaire](https://www.apa.org/depression-guideline/patient-health-questionnaire.pdf) and [scoring](https://www.hiv.uw.edu/page/mental-health-screening/phq-9).
+
+Puzzles award 10 points per correct answer. Completed sessions are saved in
+`astro_puzzles_stats`; unfinished sessions are not counted.
