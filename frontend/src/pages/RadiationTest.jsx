@@ -1,11 +1,15 @@
+
 import { useState } from 'react';
 import PageHeader from '../Components/PageHeader';
 import AssessmentSectionCard from '../Components/AssessmentSectionCard';
 import img from '../assets/radiation-banner.jpeg';
 
+const API_URL = 'http://localhost:5000/api/radiation';
 const RadiationTest = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [formValues, setFormValues] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
 
   const handleInputChange = (fieldName, newValue) => {
     setFormValues((prev) => ({
@@ -14,214 +18,216 @@ const RadiationTest = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Submitted Radiation Measurements:', formValues);
-    setActiveStep(1);
-  };
-
   const steps = ['Measure', 'Validate', 'AI Analysis', 'Report'];
 
+  // A. Radiation Dose
   const radiationDoseInputs = [
     {
       name: 'absorbedDose',
       label: 'Absorbed Dose',
       unit: 'Gy',
+      type: 'number',
       required: true,
     },
     {
       name: 'equivalentDose',
       label: 'Equivalent Dose',
       unit: 'Sv',
+      type: 'number',
       required: true,
     },
     {
       name: 'effectiveDose',
-      label: 'Effective Dose (when available)',
+      label: 'Effective Dose',
       unit: 'Sv',
+      type: 'number',
       required: false,
     },
+    {
+      name: 'cumulativeRadiationDose',
+      label: 'Cumulative Radiation Dose',
+      unit: 'Sv',
+      type: 'number',
+      required: true,
+    },
+  ];
+
+  // B. Complete Blood Count
+  const cbcInputs = [
+    {
+      name: 'wbc',
+      label: 'WBC',
+      unit: 'cells/µL',
+      type: 'number',
+      required: true,
+    },
+    {
+      name: 'neutrophilsAbsolute',
+      label: 'Neutrophils (absolute)',
+      unit: 'cells/µL',
+      type: 'number',
+      required: true,
+    },
+    {
+      name: 'lymphocytesAbsolute',
+      label: 'Lymphocytes (absolute)',
+      unit: 'cells/µL',
+      type: 'number',
+      required: true,
+    },
+    {
+      name: 'monocytesAbsolute',
+      label: 'Monocytes (absolute)',
+      unit: 'cells/µL',
+      type: 'number',
+      required: true,
+    },
+    {
+      name: 'eosinophilsAbsolute',
+      label: 'Eosinophils (absolute)',
+      unit: 'cells/µL',
+      type: 'number',
+      required: true,
+    },
+    {
+      name: 'basophilsAbsolute',
+      label: 'Basophils (absolute)',
+      unit: 'cells/µL',
+      type: 'number',
+      required: true,
+    },
+  ];
+
+  // C. DNA Damage Biomarkers
+  const dnaBiomarkersInputs = [
+    {
+      name: 'gammaH2AX',
+      label: 'γ-H2AX',
+      placeholder: 'Enter γ-H2AX measurement',
+      required: true,
+    },
+    {
+      name: 'cometAssay',
+      label: 'Comet Assay',
+      placeholder: 'Enter Comet Assay result',
+      required: true,
+    },
+    {
+      name: 'micronucleusAssay',
+      label: 'Micronucleus Assay',
+      placeholder: 'Enter Micronucleus Assay result',
+      required: true,
+    },
+  ];
+
+  // D. Additional Information
+  const additionalInputs = [
     {
       name: 'radiationType',
       label: 'Radiation Type',
       type: 'select',
-      placeholder: 'Select',
-      options: ['Gamma / X-Ray', 'Galactic Cosmic Rays (GCR)', 'Solar Particle Event (SPE)', 'Neutron'],
+      placeholder: 'Select Radiation Type',
+      options: [
+        'Gamma / X-Ray',
+        'Galactic Cosmic Rays (GCR)',
+        'Solar Particle Event (SPE)',
+        'Neutron',
+      ],
       required: true,
     },
     {
       name: 'exposureDuration',
       label: 'Exposure Duration',
       unit: 'hours',
-      required: true,
-    },
-    {
-      name: 'cumulativeExposure',
-      label: 'Cumulative Radiation Exposure',
-      unit: 'Sv',
+      type: 'number',
       required: true,
     },
   ];
 
-  const cbcInputs = [
-    {
-      name: 'totalWbc',
-      label: 'Total WBC',
-      unit: 'cells/µL',
-      required: true,
-      hasMultipleCases: true,
-      refRange: '4,500–11,000 cells/µL',
-    },
-    {
-      name: 'neutrophils',
-      label: 'Neutrophils',
-      unit: 'cells/µL',
-      required: true,
-      hasMultipleCases: true,
-      refRange: '1,800–7,700 cells/µL',
-    },
-    {
-      name: 'lymphocytes',
-      label: 'Lymphocytes',
-      unit: 'cells/µL',
-      required: true,
-      hasMultipleCases: true,
-      refRange: '1,000–4,800 cells/µL',
-    },
-    {
-      name: 'monocytes',
-      label: 'Monocytes',
-      unit: 'cells/µL',
-      required: true,
-      hasMultipleCases: true,
-      refRange: '200–800 cells/µL',
-    },
-    {
-      name: 'eosinophils',
-      label: 'Eosinophils',
-      unit: 'cells/µL',
-      required: true,
-      hasMultipleCases: true,
-      refRange: '0–500 cells/µL',
-    },
-    {
-      name: 'basophils',
-      label: 'Basophils',
-      unit: 'cells/µL',
-      required: true,
-      hasMultipleCases: true,
-      refRange: '0–200 cells/µL',
-    },
+  
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setMessage('');
+
+  const numericFields = [
+    'absorbedDose',
+    'equivalentDose',
+    'effectiveDose',
+    'cumulativeRadiationDose',
+    'wbc',
+    'neutrophilsAbsolute',
+    'lymphocytesAbsolute',
+    'monocytesAbsolute',
+    'eosinophilsAbsolute',
+    'basophilsAbsolute',
+    'exposureDuration',
   ];
 
-  const dnaBiomarkersInputs = [
-    // γ-H2AX
-    {
-      name: 'yh2axMeasurement',
-      label: 'γ-H2AX — Measurement',
-      required: true,
-    },
-    {
-      name: 'yh2axUnit',
-      label: 'γ-H2AX — Unit / Scoring Method',
-      placeholder: 'e.g. foci/cell, % tail DNA, MN/1000 BN',
-      required: true,
-    },
-    {
-      name: 'yh2axRef',
-      label: 'γ-H2AX — Lab Reference (if provided)',
-      placeholder: 'As stated by the laboratory',
-      required: false,
-    },
-    {
-      name: 'yh2axDate',
-      label: 'γ-H2AX — Test Date',
-      type: 'date',
-      required: true,
-    },
-    {
-      name: 'yh2axSource',
-      label: 'γ-H2AX — Laboratory Source',
-      placeholder: 'Laboratory / instrument name',
-      required: true,
-    },
+  const measurements = { ...formValues };
 
-    // Comet Assay
-    {
-      name: 'cometMeasurement',
-      label: 'Comet Assay — Measurement',
-      required: true,
-    },
-    {
-      name: 'cometUnit',
-      label: 'Comet Assay — Unit / Scoring Method',
-      placeholder: 'e.g. foci/cell, % tail DNA, MN/1000 BN',
-      required: true,
-    },
-    {
-      name: 'cometRef',
-      label: 'Comet Assay — Lab Reference (if provided)',
-      placeholder: 'As stated by the laboratory',
-      required: false,
-    },
-    {
-      name: 'cometDate',
-      label: 'Comet Assay — Test Date',
-      type: 'date',
-      required: true,
-    },
-    {
-      name: 'cometSource',
-      label: 'Comet Assay — Laboratory Source',
-      placeholder: 'Laboratory / instrument name',
-      required: true,
-    },
+  numericFields.forEach((field) => {
+    if (
+      measurements[field] === '' ||
+      measurements[field] === undefined
+    ) {
+      measurements[field] = null;
+    } else {
+      measurements[field] = Number(measurements[field]);
+    }
+  });
 
-    // Micronucleus Assay
-    {
-      name: 'micronucleusMeasurement',
-      label: 'Micronucleus Assay — Measurement',
-      required: true,
-    },
-    {
-      name: 'micronucleusUnit',
-      label: 'Micronucleus Assay — Unit / Scoring Method',
-      placeholder: 'e.g. foci/cell, % tail DNA, MN/1000 BN',
-      required: true,
-    },
-    {
-      name: 'micronucleusRef',
-      label: 'Micronucleus Assay — Lab Reference (if provided)',
-      placeholder: 'As stated by the laboratory',
-      required: false,
-    },
-    {
-      name: 'micronucleusDate',
-      label: 'Micronucleus Assay — Test Date',
-      type: 'date',
-      required: true,
-    },
-    {
-      name: 'micronucleusSource',
-      label: 'Micronucleus Assay — Laboratory Source',
-      placeholder: 'Laboratory / instrument name',
-      required: true,
-    },
-  ];
+  try {
+    const response = await fetch(
+      'http://localhost:5000/api/radiation',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...measurements,
+          submittedAt: new Date().toISOString(),
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error('Failed to submit radiation measurements');
+    }
+
+    const savedData = await response.json();
+
+    console.log('Saved Radiation Measurements:', savedData);
+
+    setMessage('Radiation measurements submitted successfully!');
+    setActiveStep(1);
+
+  } catch (error) {
+    console.error('Submission Error:', error);
+    setMessage('Failed to submit measurements. Please try again.');
+
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col space-y-6 pb-10">
-      {/* 1. Page Header */}
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col space-y-6 pb-10"
+    >
       <PageHeader
         bannerImage={img}
         tag="RADIATION TEST"
         step="02 / 07"
         title="Radiation Test"
         arabicTitle="اختبار الإشعاع"
-        description="Assess radiation-related health risk from absorbed and equivalent dose, white blood cell count and DNA damage biomarkers. Laboratory results and AI risk predictions are reported separately."
+        description="Assess radiation-related health risk using radiation dose, blood cell counts and DNA damage biomarkers."
       />
 
-      {/* 2. Stepper Bar */}
+      {/* Stepper */}
       <div className="rounded-2xl bg-white border border-gray-300 shadow-sm px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
         {steps.map((step, index) => {
           const isActive = index === activeStep;
@@ -235,16 +241,19 @@ const RadiationTest = () => {
               className="inline-flex items-center gap-2.5 cursor-pointer"
             >
               <span
-                className={`h-7 w-7 rounded-full inline-flex items-center justify-center text-xs font-bold transition-colors ${isActive || isCompleted
-                  ? 'bg-[#0A1B33] text-white'
-                  : 'bg-gray-100 text-gray-500 border border-gray-300'
-                  }`}
+                className={`h-7 w-7 rounded-full inline-flex items-center justify-center text-xs font-bold ${
+                  isActive || isCompleted
+                    ? 'bg-[#0A1B33] text-white'
+                    : 'bg-gray-100 text-gray-500 border border-gray-300'
+                }`}
               >
                 {isCompleted ? '✓' : index + 1}
               </span>
+
               <span
-                className={`text-sm font-bold ${isActive ? 'text-[#0A1B33]' : 'text-gray-500'
-                  }`}
+                className={`text-sm font-bold ${
+                  isActive ? 'text-[#0A1B33]' : 'text-gray-500'
+                }`}
               >
                 {step}
               </span>
@@ -253,49 +262,73 @@ const RadiationTest = () => {
         })}
       </div>
 
-      {/* 3. Section A: Radiation Dose */}
+      {/* A. Radiation Dose */}
       <AssessmentSectionCard
         title="A. Radiation Dose"
         arabicTitle="جرعة الإشعاع"
-        infoText="Gray (Gy) measures absorbed energy; Sievert (Sv) weights that energy by radiation type and tissue. They are distinct quantities — enter both as reported by the dosimeter."
+        infoText="Enter absorbed, equivalent, effective and cumulative radiation dose measurements as reported by the dosimeter."
         inputs={radiationDoseInputs}
         values={formValues}
         onChange={handleInputChange}
       />
 
-      {/* 4. Section B: White Blood Cell Count (CBC) */}
+      {/* B. CBC */}
       <AssessmentSectionCard
         title="B. White Blood Cell Count (CBC)"
         arabicTitle="تعداد خلايا الدم البيضاء"
-        infoText="Enter a complete blood count (CBC). Reference intervals shown are demonstration defaults for a general adult — use 'Edit range' to set your laboratory's own interval if it differs (e.g. for an astronaut)."
+        infoText="Enter the total WBC count and absolute counts of the five main white blood cell types."
         inputs={cbcInputs}
         values={formValues}
         onChange={handleInputChange}
-        onEditRange={(input) => console.log('Edit range for:', input.name)}
       />
 
-      {/* 5. Section C: DNA Damage Biomarkers */}
+      {/* C. DNA Biomarkers */}
       <AssessmentSectionCard
         title="C. DNA Damage Biomarkers"
         arabicTitle="مؤشرات تلف الحمض النووي"
-        infoText="γ-H2AX, Comet Assay and Micronucleus Assay are different laboratory methods with different units and scoring. They are not interchangeable and no reference interval is assumed — enter the laboratory's own reference if provided."
+        infoText="Enter the available laboratory measurements for the three DNA damage biomarkers."
         inputs={dnaBiomarkersInputs}
         values={formValues}
         onChange={handleInputChange}
       />
 
-      {/* 6. Submit Action */}
-      <div className="space-y-2 pt-2">
+      {/* D. Additional Information */}
+      <AssessmentSectionCard
+        title="D. Additional Information"
+        arabicTitle="معلومات إضافية"
+        infoText="Specify the radiation type and total exposure duration."
+        inputs={additionalInputs}
+        values={formValues}
+        onChange={handleInputChange}
+      />
+
+      {/* Submit */}
+      <div className="space-y-3 pt-2">
         <button
           type="submit"
-          className="bg-[#1D4F9C] hover:bg-[#173F7D] text-white font-semibold text-base px-7 py-3.5 rounded-full inline-flex items-center gap-2.5 transition-colors cursor-pointer shadow-sm"
+          disabled={loading}
+          className="bg-[#1D4F9C] hover:bg-[#173F7D] disabled:opacity-60 text-white font-semibold text-base px-7 py-3.5 rounded-full inline-flex items-center gap-2.5 transition-colors cursor-pointer shadow-sm"
         >
           <span>➤</span>
-          <span>Submit Measurements</span>
+          <span>
+            {loading ? 'Submitting...' : 'Submit Measurements'}
+          </span>
         </button>
 
+        {message && (
+          <p
+            className={`text-sm font-medium ${
+              message.includes('successfully')
+                ? 'text-green-600'
+                : 'text-red-600'
+            }`}
+          >
+            {message}
+          </p>
+        )}
+
         <p className="text-xs text-[#566678]">
-          Fields marked * are required. Measurements are sent to the backend API for analysis.
+          Fields marked * are required. Measurements are sent to the backend API.
         </p>
       </div>
     </form>

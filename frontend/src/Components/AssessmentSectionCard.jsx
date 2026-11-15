@@ -27,6 +27,7 @@ const AssessmentSectionCard = ({ title, arabicTitle, inputs = [], values = {}, o
             unit={input.unit}
             placeholder={input.placeholder}
             type={input.type || 'text'}
+            options={input.options || []}
             hasMultipleCases={input.hasMultipleCases}
             refRange={input.refRange}
             refNote={input.refNote}
