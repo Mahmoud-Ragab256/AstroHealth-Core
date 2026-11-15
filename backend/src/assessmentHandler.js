@@ -31,10 +31,10 @@ export function assessmentHandler(type, fields) {
 
     let modelResponse;
     try {
-      const baseUrl = (process.env.MODEL_API_URL || 'http://localhost:8000').replace(/\/$/, '');
+      const baseUrl = (process.env.MODEL_API_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}/model` : 'http://localhost:8000')).replace(/\/$/, '');
       const response = await fetch(`${baseUrl}/api/${type}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...(process.env.VERCEL_AUTOMATION_BYPASS_SECRET ? { 'x-vercel-protection-bypass': process.env.VERCEL_AUTOMATION_BYPASS_SECRET } : {}) },
         body: JSON.stringify(data),
         signal: AbortSignal.timeout(30000)
       });

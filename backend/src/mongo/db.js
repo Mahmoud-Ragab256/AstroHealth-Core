@@ -1,13 +1,15 @@
 import mongoose from 'mongoose';
 
-const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI);
-    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.error(`❌ Error connecting to MongoDB: ${error.message}`);
-    process.exit(1);
+let pending;
+export default async function connectDB() {
+  if (mongoose.connection.readyState === 1) return mongoose;
+  if (!process.env.MONGODB_URI) throw new Error('MONGODB_URI is not configured');
+  if (!pending) {
+    pending = mongoose.connect(process.env.MONGODB_URI, {
+      maxPoolSize: 5, serverSelectionTimeoutMS: 8000, connectTimeoutMS: 8000
+    }).catch(error => { pending = null; throw error; });
   }
-};
-
-export default connectDB;
+  const connection = await pending;
+  pending = null;
+  return connection;
+}

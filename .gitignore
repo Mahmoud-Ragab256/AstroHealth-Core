@@ -154,3 +154,5 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 models/json_outputs/
+
+.vercel/

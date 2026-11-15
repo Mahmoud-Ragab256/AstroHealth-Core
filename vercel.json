@@ -1,0 +1,56 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npm ci && npm ci --prefix frontend && npm ci --prefix backend",
+  "buildCommand": "npm run build",
+  "outputDirectory": "frontend/dist",
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 60
+    },
+    "api/model.py": {
+      "maxDuration": 60,
+      "includeFiles": "{models/api/**,models/catalog.json,models/models/**,shared/assessmentFields.json}",
+      "excludeFiles": "{frontend/**,backend/**,node_modules/**,models/.venv/**,models/datasets/**,models/tests/**}"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/model/:path*",
+      "destination": "/api/model"
+    },
+    {
+      "source": "/api/:path*",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/((?!api/|model/|assets/).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/:path*",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ]
+}
+
