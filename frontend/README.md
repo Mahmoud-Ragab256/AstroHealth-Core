@@ -52,3 +52,12 @@ independent of the total. Sources: [questionnaire](https://www.apa.org/depressio
 
 Puzzles award 10 points per correct answer. Completed sessions are saved in
 `astro_puzzles_stats`; unfinished sessions are not counted.
+
+## Automatic demo setup
+
+At the user's request, missing profile metadata is now filled on app startup:
+AstroHealth Demo Mission, mission day 0, and a unique DEMO-prefixed astronaut ID
+only when no ID exists. Existing identity, mission, day and extra fields are
+preserved. Settings remain editable at /profile. This supersedes the previous
+manual-setup requirement for missing metadata; measurement values are never
+automatically invented. Storage failures still leave the setup error visible.

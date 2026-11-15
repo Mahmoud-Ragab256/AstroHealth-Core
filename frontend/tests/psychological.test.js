@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { scorePhq9, phq9Questions } from '../src/data/phq9.js';
-import { parseAstronautProfile, profileIsReady } from '../src/data/astronautProfile.js';
+import { completeDemoProfile, parseAstronautProfile, profileIsReady } from '../src/data/astronautProfile.js';
 import { checkPuzzleAnswer, readPuzzleStats } from '../src/data/puzzleScoring.js';
 import { puzzles } from '../src/data/puzzles.js';
 
@@ -44,4 +44,15 @@ test('all puzzle answers are scoreable and word answers ignore case and spaces',
 test('corrupt puzzle history recovers safely', () => {
   assert.equal(readPuzzleStats('invalid').sessionsPlayed, 0);
   assert.deepEqual(readPuzzleStats('{"totalScore":10,"sessionsPlayed":1,"history":[null]}').history, []);
+});
+
+test('demo setup fills missing metadata and preserves existing identity and zero day', () => {
+  const existing = { astronaut: 'Mahmoud', id: 'AST-1', weight: '70kg', day: 0 };
+  const result = completeDemoProfile(existing, () => { throw new Error('Must preserve ID'); });
+  assert.equal(result.mission, 'AstroHealth Demo Mission');
+  assert.equal(result.day, 0);
+  assert.equal(result.weight, '70kg');
+  assert.equal(result.id, 'AST-1');
+  assert.deepEqual(completeDemoProfile(result), result);
+  assert.equal(profileIsReady(completeDemoProfile({}, () => 'DEMO-unique')), true);
 });

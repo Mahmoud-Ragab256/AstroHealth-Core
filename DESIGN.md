@@ -79,3 +79,12 @@ the calculated score accompanies an assessment submission. Screening and AI
 results remain distinct. Puzzles use inline panels, explicit answer confirmation,
 keyboard focus transitions, memory preview, and 10 points per correct answer.
 Only completed sessions persist; double activation cannot award extra points.
+
+## Automatic demo setup
+
+At the user's request, missing profile metadata is now filled on app startup:
+AstroHealth Demo Mission, mission day 0, and a unique DEMO-prefixed astronaut ID
+only when no ID exists. Existing identity, mission, day and extra fields are
+preserved. Settings remain editable at /profile. This supersedes the previous
+manual-setup requirement for missing metadata; measurement values are never
+automatically invented. Storage failures still leave the setup error visible.

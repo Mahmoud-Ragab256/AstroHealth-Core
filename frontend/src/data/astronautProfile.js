@@ -20,6 +20,27 @@ export function profileIsReady(profile) {
   return Boolean(profile.id && profile.mission && Number.isInteger(profile.day) && profile.day >= 0);
 }
 
+export function completeDemoProfile(profile, createId = () => `DEMO-${crypto.randomUUID()}`) {
+  return {
+    ...profile,
+    astronaut: profile.astronaut?.trim() || 'Demo Astronaut',
+    id: profile.id || createId(),
+    mission: profile.mission || 'AstroHealth Demo Mission',
+    day: Number.isInteger(profile.day) && profile.day >= 0 ? profile.day : 0
+  };
+}
+
+export function initializeAstronautProfile() {
+  try {
+    const profile = parseAstronautProfile(localStorage.getItem(PROFILE_KEY));
+    if (!profileIsReady(profile) || !profile.astronaut?.trim()) {
+      saveAstronautProfile(completeDemoProfile(profile));
+    }
+  } catch {
+    // Keep the existing setup error available if browser storage is blocked.
+  }
+}
+
 export function saveAstronautProfile(profile) {
   localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
   window.dispatchEvent(new Event(PROFILE_EVENT));
