@@ -1,0 +1,19 @@
+{
+  "model": "liver",
+  "status": "PREDICTED_PROTOTYPE",
+  "measurements": {
+    "ALT": 13.8,
+    "AST": 31.5,
+    "ALP": 73.9,
+    "GGT": 19.9,
+    "Total Bilirubin": 1.96,
+    "Direct Bilirubin": 0.22,
+    "Albumin": 4.63,
+    "Total Protein": 7.06
+  },
+  "predicted_labels": [
+    "Gilbert syndrome pattern"
+  ],
+  "model_score_not_clinical_probability": 0.9833070039749146,
+  "limitations": "Prototype trained on supplied synthetic/rule-labeled data; not clinically validated"
+}

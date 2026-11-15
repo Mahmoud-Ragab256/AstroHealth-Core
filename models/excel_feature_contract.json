@@ -1,0 +1,268 @@
+{
+  "Dashboard": {
+    "features": [
+      "Heart Rate",
+      "Systolic Blood Pressure",
+      "Diastolic Blood Pressure",
+      "SpO₂",
+      "Respiratory Rate",
+      "Body Temperature",
+      "Fasting Blood Glucose",
+      "ECG",
+      "HRV"
+    ],
+    "units": {
+      "Heart Rate": "BPM",
+      "Systolic Blood Pressure": "mmHg",
+      "Diastolic Blood Pressure": "mmHg",
+      "SpO₂": "%",
+      "Respiratory Rate": "breaths/min",
+      "Body Temperature": "°C",
+      "Fasting Blood Glucose": "mg/dL",
+      "ECG": "Signal",
+      "HRV": "ms"
+    }
+  },
+  "Radiation": {
+    "features": [
+      "Absorbed Dose",
+      "Equivalent Dose",
+      "Effective Dose",
+      "Cumulative Radiation Dose",
+      "WBC",
+      "Neutrophils (absolute)",
+      "Lymphocytes (absolute)",
+      "Monocytes (absolute)",
+      "Eosinophils (absolute)",
+      "Basophils (absolute)",
+      "γ-H2AX",
+      "Comet Assay",
+      "Micronucleus Assay",
+      "Radiation Type",
+      "Exposure Duration"
+    ],
+    "units": {
+      "Absorbed Dose": "Gy",
+      "Equivalent Dose": "Sv",
+      "Effective Dose": "Sv",
+      "Cumulative Radiation Dose": "Sv",
+      "WBC": "cells/µL",
+      "Neutrophils (absolute)": "10⁹/L",
+      "Lymphocytes (absolute)": "10⁹/L",
+      "Monocytes (absolute)": "10⁹/L",
+      "Eosinophils (absolute)": "10⁹/L",
+      "Basophils (absolute)": "10⁹/L",
+      "γ-H2AX": "assay-specific",
+      "Comet Assay": "assay-specific",
+      "Micronucleus Assay": "assay-specific",
+      "Radiation Type": "categorical",
+      "Exposure Duration": "time"
+    }
+  },
+  "Psychological": {
+    "features": [
+      "Sleep Duration",
+      "Sleep Efficiency",
+      "Sleep Latency",
+      "Awakenings",
+      "Mood Score",
+      "Stress Score",
+      "Attention",
+      "Memory",
+      "Decision Making",
+      "Reaction Time",
+      "Sleep Quality"
+    ],
+    "units": {
+      "Sleep Duration": "hours",
+      "Sleep Efficiency": "%",
+      "Sleep Latency": "minutes",
+      "Awakenings": "count/night",
+      "Mood Score": "1–10",
+      "Stress Score": "0–100",
+      "Attention": "%",
+      "Memory": "%",
+      "Decision Making": "%",
+      "Reaction Time": "ms",
+      "Sleep Quality": "score"
+    }
+  },
+  "Gravity": {
+    "features": [
+      "BMD T-score",
+      "Bone Density Change",
+      "Calcium",
+      "Vitamin D (25-OH)",
+      "Muscle Mass",
+      "Muscle Strength",
+      "Muscle Loss",
+      "Balance Score",
+      "Physical Performance",
+      "Orthostatic Tolerance",
+      "P1NP",
+      "CTX-I",
+      "Osteocalcin"
+    ],
+    "units": {
+      "BMD T-score": "T-score",
+      "Bone Density Change": "% change",
+      "Calcium": "mg/dL",
+      "Vitamin D (25-OH)": "ng/mL",
+      "Muscle Mass": "relative to baseline",
+      "Muscle Strength": "relative to baseline",
+      "Muscle Loss": "%",
+      "Balance Score": "%",
+      "Physical Performance": "%",
+      "Orthostatic Tolerance": "seconds",
+      "P1NP": "assay-specific",
+      "CTX-I": "assay-specific",
+      "Osteocalcin": "assay-specific"
+    }
+  },
+  "Nutrition": {
+    "features": [
+      "Protein Intake",
+      "Ferritin",
+      "Hemoglobin (Male)",
+      "Hemoglobin (Female)",
+      "Transferrin Saturation",
+      "Serum Iron",
+      "Vitamin K",
+      "Omega-3",
+      "Hydration Score",
+      "Urine Specific Gravity",
+      "Urine Volume",
+      "Body Weight"
+    ],
+    "units": {
+      "Protein Intake": "g/day",
+      "Ferritin": "ng/mL",
+      "Hemoglobin (Male)": "g/dL",
+      "Hemoglobin (Female)": "g/dL",
+      "Transferrin Saturation": "%",
+      "Serum Iron": "µg/dL",
+      "Vitamin K": "assay-specific",
+      "Omega-3": "assay-specific",
+      "Hydration Score": "%",
+      "Urine Specific Gravity": "ratio",
+      "Urine Volume": "mL/kg/hr",
+      "Body Weight": "kg / % change"
+    }
+  },
+  "Respiration": {
+    "features": [
+      "PaO₂",
+      "PaCO₂",
+      "Blood pH"
+    ],
+    "units": {
+      "PaO₂": "mmHg",
+      "PaCO₂": "mmHg",
+      "Blood pH": "pH"
+    }
+  },
+  "Mission Profile": {
+    "features": [
+      "Age",
+      "Gender",
+      "Height",
+      "Weight",
+      "BMI",
+      "Medical History",
+      "Physical Fitness",
+      "Previous Missions",
+      "Mission Duration",
+      "Gravity Level",
+      "Time in Microgravity",
+      "Distance from Earth",
+      "Exercise Hours",
+      "Sleep Hours",
+      "Mission Phase"
+    ],
+    "units": {
+      "Age": "years",
+      "Gender": "category",
+      "Height": "cm",
+      "Weight": "kg",
+      "BMI": "kg/m²",
+      "Medical History": "text/category",
+      "Physical Fitness": "score",
+      "Previous Missions": "count",
+      "Mission Duration": "time",
+      "Gravity Level": "g",
+      "Time in Microgravity": "time",
+      "Distance from Earth": "km",
+      "Exercise Hours": "hours",
+      "Sleep Hours": "hours",
+      "Mission Phase": "category"
+    }
+  },
+  "Kidney BMP": {
+    "features": [
+      "Sodium",
+      "Potassium",
+      "Chloride",
+      "Bicarbonate",
+      "BUN",
+      "Creatinine",
+      "eGFR",
+      "Glucose",
+      "Calcium (BMP)"
+    ],
+    "units": {
+      "Sodium": "mmol/L",
+      "Potassium": "mmol/L",
+      "Chloride": "mmol/L",
+      "Bicarbonate": "mmol/L",
+      "BUN": "mg/dL",
+      "Creatinine": "mg/dL",
+      "eGFR": "mL/min/1.73 m²",
+      "Glucose": "mg/dL",
+      "Calcium (BMP)": "mg/dL"
+    }
+  },
+  "Kidney Urinalysis": {
+    "features": [
+      "Urine pH",
+      "Urine Specific Gravity (Urinalysis)",
+      "Urine Protein",
+      "Urine Glucose",
+      "Urine Ketones",
+      "Urine Blood Present",
+      "Urine Leukocyte Esterase",
+      "Urine Nitrite"
+    ],
+    "units": {
+      "Urine pH": "pH",
+      "Urine Specific Gravity (Urinalysis)": "ratio",
+      "Urine Protein": "mg/dL",
+      "Urine Glucose": "mg/dL",
+      "Urine Ketones": "source-encoded value",
+      "Urine Blood Present": "0/1",
+      "Urine Leukocyte Esterase": "source-encoded value",
+      "Urine Nitrite": "source-encoded value"
+    }
+  },
+  "Liver Function": {
+    "features": [
+      "ALT",
+      "AST",
+      "ALP",
+      "GGT",
+      "Total Bilirubin",
+      "Direct Bilirubin",
+      "Albumin",
+      "Total Protein"
+    ],
+    "units": {
+      "ALT": "U/L",
+      "AST": "U/L",
+      "ALP": "U/L",
+      "GGT": "U/L",
+      "Total Bilirubin": "mg/dL",
+      "Direct Bilirubin": "mg/dL",
+      "Albumin": "g/dL",
+      "Total Protein": "g/dL"
+    }
+  }
+}

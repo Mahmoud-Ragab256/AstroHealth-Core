@@ -1,0 +1,65 @@
+{
+  "features": [
+    "Urine pH",
+    "Urine Specific Gravity (Urinalysis)",
+    "Urine Protein",
+    "Urine Glucose",
+    "Urine Ketones",
+    "Urine Blood Present",
+    "Urine Leukocyte Esterase",
+    "Urine Nitrite"
+  ],
+  "units": {
+    "Urine pH": "pH",
+    "Urine Specific Gravity (Urinalysis)": "ratio",
+    "Urine Protein": "mg/dL",
+    "Urine Glucose": "mg/dL",
+    "Urine Ketones": "source-encoded value",
+    "Urine Blood Present": "0/1",
+    "Urine Leukocyte Esterase": "source-encoded value",
+    "Urine Nitrite": "source-encoded value"
+  },
+  "classes": [
+    "Dehydration pattern",
+    "Glycosuria",
+    "Hematuria",
+    "Ketosis",
+    "Normal",
+    "Proteinuria",
+    "Urinary tract infection pattern"
+  ],
+  "mean": [
+    6.195013999938965,
+    1.0171140432357788,
+    18.024972915649414,
+    24.151973724365234,
+    0.2637209892272949,
+    0.2624704837799072,
+    0.2774767279624939,
+    0.13324996829032898
+  ],
+  "std": [
+    0.8069801926612854,
+    0.007567984983325005,
+    40.24138641357422,
+    75.3655014038086,
+    0.717548131942749,
+    0.7174969911575317,
+    0.7384551167488098,
+    0.33985233306884766
+  ],
+  "target_mode": "multilabel_sigmoid",
+  "threshold": 0.5,
+  "training_source": "03_Urinalysis.csv",
+  "provenance": "Supplied synthetic/rule-derived CSV; NOT clinically validated",
+  "imputation_medians": [
+    6.099999904632568,
+    1.0169999599456787,
+    6.5,
+    3.0999999046325684,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "model": "hydration",
+  "status": "trained_prototype",
+  "section": "Nutrition",
+  "features": [
+    "Urine Specific Gravity"
+  ],
+  "units": {
+    "Urine Specific Gravity": "ratio"
+  },
+  "classes": [
+    "Dehydration pattern",
+    "Dehydration pattern;Electrolyte imbalance risk pattern",
+    "Dehydration pattern;Electrolyte imbalance risk pattern;Insufficient fluid intake pattern",
+    "Dehydration pattern;Fluid retention pattern",
+    "Dehydration pattern;Fluid retention pattern;Electrolyte imbalance risk pattern",
+    "Dehydration pattern;Fluid retention pattern;Electrolyte imbalance risk pattern;Insufficient fluid intake pattern",
+    "Dehydration pattern;Insufficient fluid intake pattern",
+    "Dehydration pattern;Overhydration pattern",
+    "Dehydration pattern;Overhydration pattern;Electrolyte imbalance risk pattern",
+    "Dehydration pattern;Overhydration pattern;Electrolyte imbalance risk pattern;Insufficient fluid intake pattern",
+    "Dehydration pattern;Overhydration pattern;Fluid retention pattern",
+    "Dehydration pattern;Overhydration pattern;Fluid retention pattern;Electrolyte imbalance risk pattern",
+    "Dehydration pattern;Overhydration pattern;Fluid retention pattern;Electrolyte imbalance risk pattern;Insufficient fluid intake pattern",
+    "Electrolyte imbalance risk pattern",
+    "Electrolyte imbalance risk pattern;Insufficient fluid intake pattern",
+    "Fluid retention pattern",
+    "Fluid retention pattern;Electrolyte imbalance risk pattern",
+    "Fluid retention pattern;Insufficient fluid intake pattern",
+    "Insufficient fluid intake pattern",
+    "Normal",
+    "Overhydration pattern",
+    "Overhydration pattern;Electrolyte imbalance risk pattern",
+    "Overhydration pattern;Electrolyte imbalance risk pattern;Insufficient fluid intake pattern",
+    "Overhydration pattern;Fluid retention pattern",
+    "Overhydration pattern;Fluid retention pattern;Electrolyte imbalance risk pattern",
+    "Overhydration pattern;Fluid retention pattern;Insufficient fluid intake pattern",
+    "Overhydration pattern;Insufficient fluid intake pattern"
+  ],
+  "mean": [
+    1.018279790878296
+  ],
+  "std": [
+    0.006489618681371212
+  ],
+  "architecture": "Linear(n,32)->ReLU->Linear(32,32)->ReLU->Linear(32,k)",
+  "source_csv": "plan_datasets/Hydration.csv",
+  "mapping": {
+    "Urine Specific Gravity": {
+      "source": "Urine_Specific_Gravity",
+      "multiply_by": 1
+    }
+  },
+  "training_rows": 7046,
+  "held_out_rows": 1762,
+  "held_out_accuracy_on_supplied_labels": 0.6963677639046538,
+  "limitations": "Original datasets are synthetic or rule-labeled; held-out score is NOT clinical validation. Features are a subset of the Excel section, exactly the inputs used by this specialist."
+}

@@ -1,0 +1,33 @@
+{
+  "model": "immune_system",
+  "status": "trained_prototype",
+  "section": "Radiation",
+  "features": [
+    "WBC"
+  ],
+  "units": {
+    "WBC": "cells/µL"
+  },
+  "classes": [
+    "Immunosuppression",
+    "Normal"
+  ],
+  "mean": [
+    6273.90869140625
+  ],
+  "std": [
+    1694.5172119140625
+  ],
+  "architecture": "Linear(n,32)->ReLU->Linear(32,32)->ReLU->Linear(32,k)",
+  "source_csv": "data/Lymphocyte_Subset_Panel.csv",
+  "mapping": {
+    "WBC": {
+      "source": "WBC_10e9_L",
+      "multiply_by": 1000
+    }
+  },
+  "training_rows": 7196,
+  "held_out_rows": 1800,
+  "held_out_accuracy_on_supplied_labels": 0.8527777777777777,
+  "limitations": "Original datasets are synthetic or rule-labeled; held-out score is NOT clinical validation. Features are a subset of the Excel section, exactly the inputs used by this specialist."
+}

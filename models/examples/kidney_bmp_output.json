@@ -1,0 +1,20 @@
+{
+  "model": "kidney_bmp",
+  "status": "PREDICTED_PROTOTYPE",
+  "measurements": {
+    "Sodium": 141.39999,
+    "Potassium": 4.74,
+    "Chloride": 104.1,
+    "Bicarbonate": 25.6,
+    "BUN": 9.0,
+    "Creatinine": 0.66,
+    "eGFR": 114.4,
+    "Glucose": 85.6,
+    "Calcium (BMP)": 8.98
+  },
+  "predicted_labels": [
+    "Normal"
+  ],
+  "model_score_not_clinical_probability": 0.9919888377189636,
+  "limitations": "Prototype trained on supplied synthetic/rule-labeled data; not clinically validated"
+}

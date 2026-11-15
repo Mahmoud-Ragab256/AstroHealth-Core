@@ -1,0 +1,88 @@
+{
+  "model": "muscle_balance",
+  "status": "trained_prototype",
+  "section": "Gravity",
+  "features": [
+    "Muscle Mass",
+    "Muscle Strength",
+    "Muscle Loss",
+    "Balance Score",
+    "Physical Performance",
+    "Orthostatic Tolerance"
+  ],
+  "units": {
+    "Muscle Mass": "relative to baseline",
+    "Muscle Strength": "relative to baseline",
+    "Muscle Loss": "%",
+    "Balance Score": "%",
+    "Physical Performance": "%",
+    "Orthostatic Tolerance": "seconds"
+  },
+  "classes": [
+    "Muscle mass loss pattern",
+    "Muscle mass loss pattern;Muscle strength loss pattern",
+    "Muscle mass loss pattern;Muscle strength loss pattern;Poor balance pattern;Reduced physical performance pattern;Orthostatic intolerance pattern",
+    "Muscle mass loss pattern;Orthostatic intolerance pattern",
+    "Muscle mass loss pattern;Poor balance pattern",
+    "Muscle mass loss pattern;Reduced physical performance pattern",
+    "Muscle strength loss pattern",
+    "Muscle strength loss pattern;Orthostatic intolerance pattern",
+    "Muscle strength loss pattern;Poor balance pattern",
+    "Muscle strength loss pattern;Reduced physical performance pattern",
+    "Normal",
+    "Orthostatic intolerance pattern",
+    "Poor balance pattern",
+    "Poor balance pattern;Orthostatic intolerance pattern",
+    "Poor balance pattern;Reduced physical performance pattern",
+    "Reduced physical performance pattern",
+    "Reduced physical performance pattern;Orthostatic intolerance pattern"
+  ],
+  "mean": [
+    -3.011129140853882,
+    -7.152168273925781,
+    3.138373851776123,
+    71.9825439453125,
+    72.36229705810547,
+    135.60008239746094
+  ],
+  "std": [
+    4.971689701080322,
+    9.121811866760254,
+    2.1362979412078857,
+    16.288043975830078,
+    16.299100875854492,
+    66.91808319091797
+  ],
+  "architecture": "Linear(n,32)->ReLU->Linear(32,32)->ReLU->Linear(32,k)",
+  "source_csv": "plan_datasets/Muscle_Balance.csv",
+  "mapping": {
+    "Muscle Mass": {
+      "source": "Muscle_Mass_change_pct_from_baseline",
+      "multiply_by": 1
+    },
+    "Muscle Strength": {
+      "source": "Muscle_Strength_change_pct_from_baseline",
+      "multiply_by": 1
+    },
+    "Muscle Loss": {
+      "source": "Muscle_Loss_pct",
+      "multiply_by": 1
+    },
+    "Balance Score": {
+      "source": "Balance_Score_pct",
+      "multiply_by": 1
+    },
+    "Physical Performance": {
+      "source": "Physical_Performance_pct",
+      "multiply_by": 1
+    },
+    "Orthostatic Tolerance": {
+      "source": "Orthostatic_Tolerance_sec",
+      "multiply_by": 1
+    }
+  },
+  "training_rows": 6344,
+  "held_out_rows": 1586,
+  "held_out_accuracy_on_supplied_labels": 0.9583858764186634,
+  "limitations": "Original datasets are synthetic or rule-labeled; held-out score is NOT clinical validation. Features are a subset of the Excel section, exactly the inputs used by this specialist."
+}

@@ -1,0 +1,14 @@
+{
+  "model": "iron_hemoglobin",
+  "status": "PREDICTED_PROTOTYPE",
+  "measurements": {
+    "Ferritin": 67.19999694824219,
+    "Transferrin Saturation": 28.0,
+    "Serum Iron": 80.0
+  },
+  "predicted_labels": [
+    "Normal"
+  ],
+  "model_score_not_clinical_probability": 0.9387096762657166,
+  "limitations": "Prototype trained on supplied synthetic/rule-labeled data; not clinically validated"
+}

@@ -1,0 +1,19 @@
+{
+  "model": "kidney_urinalysis",
+  "status": "PREDICTED_PROTOTYPE",
+  "measurements": {
+    "Urine pH": 6.0,
+    "Urine Specific Gravity (Urinalysis)": 1.015,
+    "Urine Protein": 9.5,
+    "Urine Glucose": 7.1,
+    "Urine Ketones": 0.0,
+    "Urine Blood Present": 0.0,
+    "Urine Leukocyte Esterase": 0.0,
+    "Urine Nitrite": 0.0
+  },
+  "predicted_labels": [
+    "Normal"
+  ],
+  "model_score_not_clinical_probability": 0.999771773815155,
+  "limitations": "Prototype trained on supplied synthetic/rule-labeled data; not clinically validated"
+}

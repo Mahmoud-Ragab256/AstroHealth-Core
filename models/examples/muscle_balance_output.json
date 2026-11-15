@@ -1,0 +1,17 @@
+{
+  "model": "muscle_balance",
+  "status": "PREDICTED_PROTOTYPE",
+  "measurements": {
+    "Muscle Mass": -12.800000190734863,
+    "Muscle Strength": -3.0,
+    "Muscle Loss": 9.5,
+    "Balance Score": 77.5,
+    "Physical Performance": 77.5999984741211,
+    "Orthostatic Tolerance": 122.0999984741211
+  },
+  "predicted_labels": [
+    "Muscle mass loss pattern"
+  ],
+  "model_score_not_clinical_probability": 0.9580439329147339,
+  "limitations": "Prototype trained on supplied synthetic/rule-labeled data; not clinically validated"
+}

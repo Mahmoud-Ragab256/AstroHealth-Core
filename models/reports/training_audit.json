@@ -1,0 +1,252 @@
+{
+  "heart_vitals": {
+    "status": "TRAINED_PROTOTYPE",
+    "features": [
+      "Heart Rate",
+      "Systolic Blood Pressure",
+      "Diastolic Blood Pressure",
+      "SpO₂",
+      "Respiratory Rate",
+      "Body Temperature"
+    ],
+    "excel_section": "Dashboard",
+    "training_records": 6360,
+    "test_records": 1590,
+    "held_out_accuracy": 0.9472,
+    "label_count": 56,
+    "source": "plan_datasets/Vital_Signs.csv"
+  },
+  "bone_health": {
+    "status": "TRAINED_PROTOTYPE",
+    "features": [
+      "BMD T-score",
+      "Bone Density Change",
+      "Calcium",
+      "Vitamin D (25-OH)",
+      "P1NP",
+      "CTX-I",
+      "Osteocalcin"
+    ],
+    "excel_section": "Gravity",
+    "training_records": 6284,
+    "test_records": 1571,
+    "held_out_accuracy": 0.9567,
+    "label_count": 27,
+    "source": "plan_datasets/Bone_Health.csv"
+  },
+  "muscle_balance": {
+    "status": "TRAINED_PROTOTYPE",
+    "features": [
+      "Muscle Mass",
+      "Muscle Strength",
+      "Muscle Loss",
+      "Balance Score",
+      "Physical Performance",
+      "Orthostatic Tolerance"
+    ],
+    "excel_section": "Gravity",
+    "training_records": 6344,
+    "test_records": 1586,
+    "held_out_accuracy": 0.9584,
+    "label_count": 17,
+    "source": "plan_datasets/Muscle_Balance.csv"
+  },
+  "iron_hemoglobin": {
+    "status": "TRAINED_PROTOTYPE",
+    "features": [
+      "Ferritin",
+      "Transferrin Saturation",
+      "Serum Iron"
+    ],
+    "excel_section": "Nutrition",
+    "training_records": 6756,
+    "test_records": 1689,
+    "held_out_accuracy": 0.7721,
+    "label_count": 7,
+    "source": "plan_datasets/Iron_Hemoglobin.csv"
+  },
+  "hydration": {
+    "status": "TRAINED_PROTOTYPE",
+    "features": [
+      "Urine Specific Gravity"
+    ],
+    "excel_section": "Nutrition",
+    "training_records": 7046,
+    "test_records": 1762,
+    "held_out_accuracy": 0.6964,
+    "label_count": 27,
+    "source": "plan_datasets/Hydration.csv"
+  },
+  "immune_system": {
+    "status": "TRAINED_PROTOTYPE",
+    "features": [
+      "WBC"
+    ],
+    "excel_section": "Radiation",
+    "training_records": 7196,
+    "test_records": 1800,
+    "held_out_accuracy": 0.8528,
+    "label_count": 2,
+    "source": "data/Lymphocyte_Subset_Panel.csv"
+  },
+  "radiation_biodosimetry": {
+    "status": "TRAINED_PROTOTYPE",
+    "features": [
+      "γ-H2AX",
+      "Micronucleus Assay"
+    ],
+    "excel_section": "Radiation",
+    "training_records": 6925,
+    "test_records": 1732,
+    "held_out_accuracy": 0.9509,
+    "label_count": 3,
+    "source": "data/Radiation_Biodosimetry.csv"
+  },
+  "kidney": {
+    "status": "BLOCKED_MISSING_EXCEL_INPUTS",
+    "reason": "Excel does not define a kidney panel (creatinine, eGFR, BUN, sodium, urinalysis, etc.). Calcium alone cannot reproduce kidney panel labels.",
+    "needed_excel_features": [
+      "Creatinine",
+      "eGFR",
+      "BUN",
+      "Sodium",
+      "Potassium",
+      "Urinalysis measurements"
+    ]
+  },
+  "liver": {
+    "status": "BLOCKED_MISSING_EXCEL_INPUTS",
+    "reason": "ALT, AST, bilirubin, albumin and other hepatic-panel features are absent from Excel.",
+    "needed_excel_features": [
+      "ALT",
+      "AST",
+      "ALP",
+      "Bilirubin",
+      "Albumin"
+    ]
+  },
+  "ecg": {
+    "status": "BLOCKED_MISSING_EXCEL_INPUTS",
+    "reason": "Excel has ECG as a Signal but the supplied ECG datasets contain extracted intervals rather than raw waveform samples. Synthetic ECG signals would be misleading.",
+    "needed_excel_features": [
+      "ECG waveform schema (lead, sampling frequency, waveform samples)"
+    ]
+  },
+  "lipid_panel": {
+    "status": "BLOCKED_MISSING_EXCEL_INPUTS",
+    "reason": "Total cholesterol, LDL, HDL and triglycerides are not in the Excel measurement plan.",
+    "needed_excel_features": [
+      "Total Cholesterol",
+      "LDL",
+      "HDL",
+      "Triglycerides"
+    ]
+  },
+  "toxins": {
+    "status": "BLOCKED_MISSING_EXCEL_INPUTS",
+    "reason": "Heavy-metal/co-oximetry analytes are not in the Excel measurement plan.",
+    "needed_excel_features": [
+      "Lead",
+      "Mercury",
+      "Cadmium",
+      "Carboxyhemoglobin",
+      "Methemoglobin"
+    ]
+  },
+  "cardiovascular": {
+    "status": "TRAINED_PROTOTYPE",
+    "excel_section": "Dashboard",
+    "features": [
+      "Heart Rate",
+      "Systolic Blood Pressure",
+      "Diastolic Blood Pressure",
+      "HRV",
+      "Fasting Blood Glucose"
+    ],
+    "training_records": 1646,
+    "test_records": 412,
+    "held_out_accuracy": 0.8592,
+    "source": "training_data_strict/dashboard_synthetic_mixed.csv",
+    "label_provenance": "Prototype_Label from joined synthetic dashboard records. It was assigned using a broader panel; this is NOT a validated cardiovascular risk target."
+  },
+  "radiation_exposure": {
+    "status": "TRAINED_PROTOTYPE",
+    "excel_section": "Radiation",
+    "features": [
+      "Absorbed Dose",
+      "Cumulative Radiation Dose"
+    ],
+    "training_records": 6895,
+    "test_records": 1724,
+    "held_out_accuracy": 0.5215,
+    "source": "plan_datasets/Radiation.csv",
+    "label_provenance": "Disease_Labels from the existing Radiation.csv; some original rules may use additional columns that are not model inputs."
+  },
+  "respiration": {
+    "status": "TRAINED_PROTOTYPE",
+    "excel_section": "Respiration",
+    "features": [
+      "PaO₂",
+      "PaCO₂",
+      "Blood pH"
+    ],
+    "training_records": 6753,
+    "test_records": 1689,
+    "held_out_accuracy": 0.8709,
+    "source": "plan_datasets/Blood_Gas.csv",
+    "label_provenance": "Disease_Labels from Blood_Gas.csv. Model uses only the three respiration fields in Excel, not the other source columns."
+  },
+  "nutrition_monitor": {
+    "status": "TRAINED_PROTOTYPE",
+    "excel_section": "Nutrition",
+    "features": [
+      "Protein Intake",
+      "Ferritin",
+      "Transferrin Saturation",
+      "Serum Iron",
+      "Vitamin K",
+      "Omega-3",
+      "Hydration Score",
+      "Urine Specific Gravity",
+      "Urine Volume",
+      "Body Weight"
+    ],
+    "training_records": 1646,
+    "test_records": 412,
+    "held_out_accuracy": 0.7816,
+    "source": "training_data_strict/nutrition_synthetic_mixed.csv",
+    "label_provenance": "Synthetic joined, rule-derived section labels. Excludes sex-split hemoglobin fields because they cannot be consistently inferred from source records."
+  },
+  "altered_gravity": {
+    "status": "TRAINED_PROTOTYPE",
+    "excel_section": "Gravity",
+    "features": [
+      "Muscle Mass",
+      "Muscle Strength",
+      "Muscle Loss",
+      "Balance Score",
+      "Physical Performance",
+      "Orthostatic Tolerance"
+    ],
+    "training_records": 1760,
+    "test_records": 440,
+    "held_out_accuracy": 0.4045,
+    "source": "training_data_strict/gravity_synthetic_mixed.csv",
+    "label_provenance": "Synthetic joined Gravity labels, not independently verified altered-gravity adaptation labels."
+  },
+  "sleep_quality": {
+    "status": "TRAINED_PROTOTYPE",
+    "excel_section": "Psychological",
+    "features": [
+      "Sleep Duration",
+      "Sleep Efficiency",
+      "Sleep Latency",
+      "Awakenings"
+    ],
+    "training_records": 1760,
+    "test_records": 440,
+    "held_out_accuracy": 0.6136,
+    "source": "training_data_strict/psychological_synthetic_mixed.csv",
+    "label_provenance": "Simulation target derived from the Excel Sleep Quality score (<50=Low, 50–79=Moderate, 80+=High), not a clinical sleep-disorder label. Sleep Quality is deliberately a target, NOT an input."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "model": "altered_gravity",
+  "status": "PREDICTED_PROTOTYPE",
+  "measurements": {
+    "Muscle Mass": 2.299999952316284,
+    "Muscle Strength": -24.899999618530273,
+    "Muscle Loss": 1.0,
+    "Balance Score": 84.0999984741211,
+    "Physical Performance": 48.5,
+    "Orthostatic Tolerance": 65.5999984741211
+  },
+  "predicted_labels": [
+    "Normal"
+  ],
+  "model_score_not_clinical_probability": 0.5054292678833008,
+  "limitations": "Prototype trained on supplied synthetic/rule-labeled data; not clinically validated"
+}

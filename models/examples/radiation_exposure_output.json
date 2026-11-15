@@ -1,0 +1,13 @@
+{
+  "model": "radiation_exposure",
+  "status": "PREDICTED_PROTOTYPE",
+  "measurements": {
+    "Absorbed Dose": 0.4009999930858612,
+    "Cumulative Radiation Dose": 0.41999998688697815
+  },
+  "predicted_labels": [
+    "Normal"
+  ],
+  "model_score_not_clinical_probability": 0.5525756478309631,
+  "limitations": "Prototype trained on supplied synthetic/rule-labeled data; not clinically validated"
+}

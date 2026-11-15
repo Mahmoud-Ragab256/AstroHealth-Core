@@ -1,0 +1,12 @@
+{
+  "model": "immune_system",
+  "status": "PREDICTED_PROTOTYPE",
+  "measurements": {
+    "WBC": 8320.0
+  },
+  "predicted_labels": [
+    "Normal"
+  ],
+  "model_score_not_clinical_probability": 0.9753677248954773,
+  "limitations": "Prototype trained on supplied synthetic/rule-labeled data; not clinically validated"
+}

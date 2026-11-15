@@ -1,0 +1,15 @@
+{
+  "model": "sleep_quality",
+  "status": "PREDICTED_PROTOTYPE",
+  "measurements": {
+    "Sleep Duration": 7.03000020980835,
+    "Sleep Efficiency": 82.19999694824219,
+    "Sleep Latency": 0.0,
+    "Awakenings": 5.0
+  },
+  "predicted_labels": [
+    "Moderate simulated sleep quality"
+  ],
+  "model_score_not_clinical_probability": 0.6283027529716492,
+  "limitations": "Prototype trained on supplied synthetic/rule-labeled data; not clinically validated"
+}

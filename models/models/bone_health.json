@@ -1,0 +1,106 @@
+{
+  "model": "bone_health",
+  "status": "trained_prototype",
+  "section": "Gravity",
+  "features": [
+    "BMD T-score",
+    "Bone Density Change",
+    "Calcium",
+    "Vitamin D (25-OH)",
+    "P1NP",
+    "CTX-I",
+    "Osteocalcin"
+  ],
+  "units": {
+    "BMD T-score": "T-score",
+    "Bone Density Change": "% change",
+    "Calcium": "mg/dL",
+    "Vitamin D (25-OH)": "ng/mL",
+    "P1NP": "assay-specific",
+    "CTX-I": "assay-specific",
+    "Osteocalcin": "assay-specific"
+  },
+  "classes": [
+    "Accelerated bone loss pattern",
+    "Accelerated bone loss pattern;High bone turnover pattern",
+    "Accelerated bone loss pattern;Hypercalcemia",
+    "Accelerated bone loss pattern;Hypocalcemia",
+    "Accelerated bone loss pattern;Vitamin D deficiency",
+    "High bone turnover pattern",
+    "High bone turnover pattern;Hypercalcemia",
+    "High bone turnover pattern;Hypocalcemia",
+    "High bone turnover pattern;Vitamin D deficiency",
+    "Hypercalcemia",
+    "Hypocalcemia",
+    "Low bone mass pattern",
+    "Low bone mass pattern;Accelerated bone loss pattern",
+    "Low bone mass pattern;High bone turnover pattern",
+    "Low bone mass pattern;Hypercalcemia",
+    "Low bone mass pattern;Hypocalcemia",
+    "Low bone mass pattern;Vitamin D deficiency",
+    "Normal",
+    "Osteoporosis-range bone density pattern",
+    "Osteoporosis-range bone density pattern;Accelerated bone loss pattern",
+    "Osteoporosis-range bone density pattern;High bone turnover pattern",
+    "Osteoporosis-range bone density pattern;Hypercalcemia",
+    "Osteoporosis-range bone density pattern;Hypocalcemia",
+    "Osteoporosis-range bone density pattern;Vitamin D deficiency",
+    "Vitamin D deficiency",
+    "Vitamin D deficiency;Hypercalcemia",
+    "Vitamin D deficiency;Hypocalcemia"
+  ],
+  "mean": [
+    -0.3170819878578186,
+    -1.7287403345108032,
+    9.415773391723633,
+    37.13656997680664,
+    45.3972282409668,
+    0.3535822927951813,
+    24.033403396606445
+  ],
+  "std": [
+    1.398644208908081,
+    3.1103851795196533,
+    0.5764337182044983,
+    10.802103042602539,
+    19.680057525634766,
+    0.18255138397216797,
+    7.234283447265625
+  ],
+  "architecture": "Linear(n,32)->ReLU->Linear(32,32)->ReLU->Linear(32,k)",
+  "source_csv": "plan_datasets/Bone_Health.csv",
+  "mapping": {
+    "BMD T-score": {
+      "source": "BMD_T_score",
+      "multiply_by": 1
+    },
+    "Bone Density Change": {
+      "source": "Bone_Density_Change_pct",
+      "multiply_by": 1
+    },
+    "Calcium": {
+      "source": "Calcium_mg_dL",
+      "multiply_by": 1
+    },
+    "Vitamin D (25-OH)": {
+      "source": "Vitamin_D_25OH_ng_mL",
+      "multiply_by": 1
+    },
+    "P1NP": {
+      "source": "P1NP_ng_mL",
+      "multiply_by": 1
+    },
+    "CTX-I": {
+      "source": "CTX_I_ng_mL",
+      "multiply_by": 1
+    },
+    "Osteocalcin": {
+      "source": "Osteocalcin_ng_mL",
+      "multiply_by": 1
+    }
+  },
+  "training_rows": 6284,
+  "held_out_rows": 1571,
+  "held_out_accuracy_on_supplied_labels": 0.9567154678548695,
+  "limitations": "Original datasets are synthetic or rule-labeled; held-out score is NOT clinical validation. Features are a subset of the Excel section, exactly the inputs used by this specialist."
+}

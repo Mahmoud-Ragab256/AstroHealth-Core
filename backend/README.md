@@ -2,6 +2,8 @@
 
 Run `node src/index.js` from `backend`. Set `MONGODB_URI` in `.env`.
 `MODEL_API_URL` defaults to `http://localhost:8000` (origin only).
+The repository now provides that service in `models/api`; see `../models/API.md`
+for installation, startup, and the actual specialist feature requirements.
 
 All five endpoints accept JSON and forward it unchanged with POST to the same
 path on the model server:
@@ -87,6 +89,9 @@ new report measurements, avoiding partial saves and duplicate records.
 Errors: **400** invalid input; **502** model failure/invalid JSON;
 **504** model timeout (30 seconds); **500** report persistence failure.
 Model failures do not create reports. A failed save never returns success.
+**422** means the model rejected inputs or no specialist has all its required
+measurements; the response includes missing fields. A successful partial report
+lists skipped models and unused inputs explicitly in `modelResponse`.
 
 The frontend forms submit this JSON, omit blank measurements, and navigate to
 the saved report. Vite proxies same-origin `/api` requests to this backend.

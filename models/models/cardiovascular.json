@@ -1,0 +1,52 @@
+{
+  "model": "cardiovascular",
+  "status": "trained_prototype",
+  "section": "Dashboard",
+  "features": [
+    "Heart Rate",
+    "Systolic Blood Pressure",
+    "Diastolic Blood Pressure",
+    "HRV",
+    "Fasting Blood Glucose"
+  ],
+  "units": {
+    "Heart Rate": "BPM",
+    "Systolic Blood Pressure": "mmHg",
+    "Diastolic Blood Pressure": "mmHg",
+    "HRV": "ms",
+    "Fasting Blood Glucose": "mg/dL"
+  },
+  "classes": [
+    "Bradycardia",
+    "Bradypnea",
+    "Fever",
+    "Hypertension",
+    "Hypotension",
+    "Hypothermia",
+    "Hypoxemia",
+    "Normal",
+    "Tachycardia",
+    "Tachypnea"
+  ],
+  "mean": [
+    87.47228240966797,
+    116.49445343017578,
+    73.8527603149414,
+    45.08437728881836,
+    103.15507507324219
+  ],
+  "std": [
+    29.31365394592285,
+    20.631200790405273,
+    13.624518394470215,
+    15.134819030761719,
+    31.6195068359375
+  ],
+  "architecture": "Linear(n,32)->ReLU->Linear(32,32)->ReLU->Linear(32,k)",
+  "source_csv": "training_data_strict/dashboard_synthetic_mixed.csv",
+  "training_rows": 1646,
+  "held_out_rows": 412,
+  "held_out_accuracy_on_supplied_labels": 0.8592233009708737,
+  "label_provenance": "Prototype_Label from joined synthetic dashboard records. It was assigned using a broader panel; this is NOT a validated cardiovascular risk target.",
+  "limitations": "Prototype only; labels are synthetic, rule-derived or generated; no clinical, astronaut-flight, or radiation operational validation. Input features must match declared Excel subset exactly."
+}

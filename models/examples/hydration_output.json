@@ -1,0 +1,12 @@
+{
+  "model": "hydration",
+  "status": "PREDICTED_PROTOTYPE",
+  "measurements": {
+    "Urine Specific Gravity": 1.0190000534057617
+  },
+  "predicted_labels": [
+    "Normal"
+  ],
+  "model_score_not_clinical_probability": 0.7045323252677917,
+  "limitations": "Prototype trained on supplied synthetic/rule-labeled data; not clinically validated"
+}

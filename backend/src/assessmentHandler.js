@@ -39,6 +39,18 @@ export function assessmentHandler(type, fields) {
         signal: AbortSignal.timeout(30000)
       });
       if (!response.ok) {
+        if (response.status === 400 || response.status === 422) {
+          const details = await response.json();
+          const missing = (details.skipped_models || [])
+            .map(item => `${item.model}: ${(item.missing_fields || []).join(', ')}`)
+            .join('; ');
+          const validation = (details.errors || [])
+            .map(item => `${item.field}: ${item.message}`).join('; ');
+          return res.status(422).json({
+            message: [details.message || 'Invalid model input', missing || validation].filter(Boolean).join('. '),
+            details
+          });
+        }
         return res.status(502).json({ message: 'Model service returned an error' });
       }
       modelResponse = await response.json();

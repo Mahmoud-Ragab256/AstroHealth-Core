@@ -1,0 +1,67 @@
+{
+  "model": "nutrition_monitor",
+  "status": "trained_prototype",
+  "section": "Nutrition",
+  "features": [
+    "Protein Intake",
+    "Ferritin",
+    "Transferrin Saturation",
+    "Serum Iron",
+    "Vitamin K",
+    "Omega-3",
+    "Hydration Score",
+    "Urine Specific Gravity",
+    "Urine Volume",
+    "Body Weight"
+  ],
+  "units": {
+    "Protein Intake": "g/day",
+    "Ferritin": "ng/mL",
+    "Transferrin Saturation": "%",
+    "Serum Iron": "µg/dL",
+    "Vitamin K": "assay-specific",
+    "Omega-3": "assay-specific",
+    "Hydration Score": "%",
+    "Urine Specific Gravity": "ratio",
+    "Urine Volume": "mL/kg/hr",
+    "Body Weight": "kg / % change"
+  },
+  "classes": [
+    "Erythrocytosis pattern",
+    "Iron deficiency anemia pattern",
+    "Iron deficiency without anemia pattern",
+    "Iron overload pattern",
+    "Normal"
+  ],
+  "mean": [
+    84.20775604248047,
+    112.8919906616211,
+    27.592580795288086,
+    102.08482360839844,
+    0.9908347725868225,
+    5.047882556915283,
+    74.97422790527344,
+    1.0183637142181396,
+    1.0965794324874878,
+    74.65325927734375
+  ],
+  "std": [
+    24.65291976928711,
+    94.39057922363281,
+    12.924546241760254,
+    60.09682846069336,
+    0.30458956956863403,
+    1.9901102781295776,
+    14.401981353759766,
+    0.006518126465380192,
+    0.39204150438308716,
+    15.147454261779785
+  ],
+  "architecture": "Linear(n,32)->ReLU->Linear(32,32)->ReLU->Linear(32,k)",
+  "source_csv": "training_data_strict/nutrition_synthetic_mixed.csv",
+  "training_rows": 1646,
+  "held_out_rows": 412,
+  "held_out_accuracy_on_supplied_labels": 0.7815533980582524,
+  "label_provenance": "Synthetic joined, rule-derived section labels. Excludes sex-split hemoglobin fields because they cannot be consistently inferred from source records.",
+  "limitations": "Prototype only; labels are synthetic, rule-derived or generated; no clinical, astronaut-flight, or radiation operational validation. Input features must match declared Excel subset exactly."
+}

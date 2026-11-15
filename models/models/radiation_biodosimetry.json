@@ -1,0 +1,42 @@
+{
+  "model": "radiation_biodosimetry",
+  "status": "trained_prototype",
+  "section": "Radiation",
+  "features": [
+    "γ-H2AX",
+    "Micronucleus Assay"
+  ],
+  "units": {
+    "γ-H2AX": "assay-specific",
+    "Micronucleus Assay": "assay-specific"
+  },
+  "classes": [
+    "High radiation exposure",
+    "Low radiation exposure",
+    "Normal"
+  ],
+  "mean": [
+    1.409175157546997,
+    24.791086196899414
+  ],
+  "std": [
+    2.286884307861328,
+    39.82115936279297
+  ],
+  "architecture": "Linear(n,32)->ReLU->Linear(32,32)->ReLU->Linear(32,k)",
+  "source_csv": "data/Radiation_Biodosimetry.csv",
+  "mapping": {
+    "γ-H2AX": {
+      "source": "Gamma_H2AX_foci_per_cell",
+      "multiply_by": 1
+    },
+    "Micronucleus Assay": {
+      "source": "Micronuclei_per_1000_cells",
+      "multiply_by": 1
+    }
+  },
+  "training_rows": 6925,
+  "held_out_rows": 1732,
+  "held_out_accuracy_on_supplied_labels": 0.9509237875288684,
+  "limitations": "Original datasets are synthetic or rule-labeled; held-out score is NOT clinical validation. Features are a subset of the Excel section, exactly the inputs used by this specialist."
+}

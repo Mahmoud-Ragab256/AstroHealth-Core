@@ -1,0 +1,41 @@
+{
+  "model": "sleep_quality",
+  "status": "trained_prototype",
+  "section": "Psychological",
+  "features": [
+    "Sleep Duration",
+    "Sleep Efficiency",
+    "Sleep Latency",
+    "Awakenings"
+  ],
+  "units": {
+    "Sleep Duration": "hours",
+    "Sleep Efficiency": "%",
+    "Sleep Latency": "minutes",
+    "Awakenings": "count/night"
+  },
+  "classes": [
+    "High simulated sleep quality",
+    "Low simulated sleep quality",
+    "Moderate simulated sleep quality"
+  ],
+  "mean": [
+    7.053802967071533,
+    84.35741424560547,
+    25.148637771606445,
+    2.949431896209717
+  ],
+  "std": [
+    1.7474340200424194,
+    11.513101577758789,
+    16.48272705078125,
+    1.986667275428772
+  ],
+  "architecture": "Linear(n,32)->ReLU->Linear(32,32)->ReLU->Linear(32,k)",
+  "source_csv": "training_data_strict/psychological_synthetic_mixed.csv",
+  "training_rows": 1760,
+  "held_out_rows": 440,
+  "held_out_accuracy_on_supplied_labels": 0.6136363636363636,
+  "label_provenance": "Simulation target derived from the Excel Sleep Quality score (<50=Low, 50–79=Moderate, 80+=High), not a clinical sleep-disorder label. Sleep Quality is deliberately a target, NOT an input.",
+  "limitations": "Prototype only; labels are synthetic, rule-derived or generated; no clinical, astronaut-flight, or radiation operational validation. Input features must match declared Excel subset exactly."
+}

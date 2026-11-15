@@ -1,0 +1,77 @@
+{
+  "immunity": {
+    "models": [
+      "immune_system"
+    ],
+    "status": "PROTOTYPE"
+  },
+  "organ_functionality": {
+    "models": [
+      "kidney_bmp",
+      "kidney_urinalysis",
+      "liver"
+    ],
+    "status": "PROTOTYPE",
+    "description": "Separate BMP, Urinalysis and Hepatic Panel classifiers; real-world clinical validation missing"
+  },
+  "toxins": {
+    "models": [
+      "toxins"
+    ],
+    "status": "BLOCKED_EXCEL_INPUTS"
+  },
+  "cardiovascular": {
+    "models": [
+      "cardiovascular",
+      "ecg"
+    ],
+    "status": "PARTIAL_ECG_BLOCKED"
+  },
+  "radiation_effects": {
+    "models": [
+      "radiation_exposure",
+      "radiation_biodosimetry"
+    ],
+    "status": "PROTOTYPE"
+  },
+  "respiration": {
+    "models": [
+      "respiration"
+    ],
+    "status": "PROTOTYPE"
+  },
+  "bone_and_muscle_loss": {
+    "models": [
+      "bone_health",
+      "muscle_balance"
+    ],
+    "status": "PROTOTYPE"
+  },
+  "nutrition_monitoring": {
+    "models": [
+      "nutrition_monitor",
+      "iron_hemoglobin",
+      "hydration",
+      "lipid_panel"
+    ],
+    "status": "PARTIAL_LIPIDS_BLOCKED"
+  },
+  "altered_gravity_effects": {
+    "models": [
+      "altered_gravity"
+    ],
+    "status": "PROTOTYPE"
+  },
+  "heart_rate_monitoring": {
+    "models": [
+      "heart_vitals"
+    ],
+    "status": "PROTOTYPE"
+  },
+  "sleep_quality_monitoring": {
+    "models": [
+      "sleep_quality"
+    ],
+    "status": "PROTOTYPE"
+  }
+}

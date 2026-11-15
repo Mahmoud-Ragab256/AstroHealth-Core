@@ -1,0 +1,16 @@
+{
+  "model": "cardiovascular",
+  "status": "PREDICTED_PROTOTYPE",
+  "measurements": {
+    "Heart Rate": 136.3000030517578,
+    "Systolic Blood Pressure": 100.30000305175781,
+    "Diastolic Blood Pressure": 65.0,
+    "HRV": 38.6338996887207,
+    "Fasting Blood Glucose": 89.69999694824219
+  },
+  "predicted_labels": [
+    "Tachycardia"
+  ],
+  "model_score_not_clinical_probability": 0.9765869975090027,
+  "limitations": "Prototype trained on supplied synthetic/rule-labeled data; not clinically validated"
+}

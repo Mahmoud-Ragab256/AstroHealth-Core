@@ -1,0 +1,60 @@
+{
+  "kidney_bmp": {
+    "source_csv": "01_BMP.csv",
+    "records": 8996,
+    "features": 9,
+    "labels": 13,
+    "validation_micro_F1_synthetic": 0.9481,
+    "best_epoch": 30,
+    "missing_source_values_imputed": {
+      "Sodium": 165,
+      "Potassium": 161,
+      "Chloride": 160,
+      "Bicarbonate": 168,
+      "BUN": 169,
+      "Creatinine": 0,
+      "eGFR": 0,
+      "Glucose": 171,
+      "Calcium (BMP)": 179
+    },
+    "limitation": "Synthetic/rule-derived labels; non-clinical demonstration; random split shares source generation rules"
+  },
+  "kidney_urinalysis": {
+    "source_csv": "03_Urinalysis.csv",
+    "records": 8996,
+    "features": 8,
+    "labels": 7,
+    "validation_micro_F1_synthetic": 0.9927,
+    "best_epoch": 28,
+    "missing_source_values_imputed": {
+      "Urine pH": 195,
+      "Urine Specific Gravity (Urinalysis)": 209,
+      "Urine Protein": 176,
+      "Urine Glucose": 172,
+      "Urine Ketones": 192,
+      "Urine Blood Present": 166,
+      "Urine Leukocyte Esterase": 152,
+      "Urine Nitrite": 177
+    },
+    "limitation": "Synthetic/rule-derived labels; non-clinical demonstration; random split shares source generation rules"
+  },
+  "liver": {
+    "source_csv": "02_Hepatic_Function_Panel.csv",
+    "records": 8996,
+    "features": 8,
+    "labels": 6,
+    "validation_micro_F1_synthetic": 0.9817,
+    "best_epoch": 30,
+    "missing_source_values_imputed": {
+      "ALT": 145,
+      "AST": 171,
+      "ALP": 167,
+      "GGT": 169,
+      "Total Bilirubin": 172,
+      "Direct Bilirubin": 191,
+      "Albumin": 192,
+      "Total Protein": 164
+    },
+    "limitation": "Synthetic/rule-derived labels; non-clinical demonstration; random split shares source generation rules"
+  }
+}

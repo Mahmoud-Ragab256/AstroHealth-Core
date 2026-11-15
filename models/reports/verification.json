@@ -1,0 +1,24 @@
+{
+  "trained_and_verified": 13,
+  "models": [
+    "heart_vitals",
+    "bone_health",
+    "muscle_balance",
+    "iron_hemoglobin",
+    "hydration",
+    "immune_system",
+    "radiation_biodosimetry",
+    "cardiovascular",
+    "radiation_exposure",
+    "respiration",
+    "nutrition_monitor",
+    "altered_gravity",
+    "sleep_quality"
+  ],
+  "model_framework": "PyTorch only",
+  "exact_excel_feature_subset": "PASS",
+  "dataset_column_order": "PASS",
+  "missing_extra_input_rejection": "PASS",
+  "json_output": "PASS",
+  "blocked_safety": "PASS"
+}

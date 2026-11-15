@@ -1,0 +1,76 @@
+{
+  "features": [
+    "Sodium",
+    "Potassium",
+    "Chloride",
+    "Bicarbonate",
+    "BUN",
+    "Creatinine",
+    "eGFR",
+    "Glucose",
+    "Calcium (BMP)"
+  ],
+  "units": {
+    "Sodium": "mmol/L",
+    "Potassium": "mmol/L",
+    "Chloride": "mmol/L",
+    "Bicarbonate": "mmol/L",
+    "BUN": "mg/dL",
+    "Creatinine": "mg/dL",
+    "eGFR": "mL/min/1.73 m²",
+    "Glucose": "mg/dL",
+    "Calcium (BMP)": "mg/dL"
+  },
+  "classes": [
+    "Acute kidney injury pattern",
+    "Chronic kidney disease pattern",
+    "Dehydration pattern",
+    "Hypercalcemia",
+    "Hyperglycemia",
+    "Hyperkalemia",
+    "Hypernatremia",
+    "Hypocalcemia",
+    "Hypoglycemia",
+    "Hypokalemia",
+    "Hyponatremia",
+    "Metabolic acidosis pattern",
+    "Normal"
+  ],
+  "mean": [
+    140.3809814453125,
+    4.235819339752197,
+    102.4501724243164,
+    24.387258529663086,
+    17.822938919067383,
+    1.0891294479370117,
+    84.31424713134766,
+    99.39344787597656,
+    9.54399299621582
+  ],
+  "std": [
+    4.522343635559082,
+    0.604647159576416,
+    4.548912048339844,
+    2.537187337875366,
+    9.70358657836914,
+    0.5114904046058655,
+    22.399120330810547,
+    32.571014404296875,
+    0.8248522877693176
+  ],
+  "target_mode": "multilabel_sigmoid",
+  "threshold": 0.5,
+  "training_source": "01_BMP.csv",
+  "provenance": "Supplied synthetic/rule-derived CSV; NOT clinically validated",
+  "imputation_medians": [
+    140.5,
+    4.199999809265137,
+    102.4000015258789,
+    24.600000381469727,
+    15.399999618530273,
+    0.9700000286102295,
+    86.30000305175781,
+    94.5999984741211,
+    9.529999732971191
+  ]
+}

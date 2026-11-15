@@ -1,0 +1,64 @@
+{
+  "features": [
+    "ALT",
+    "AST",
+    "ALP",
+    "GGT",
+    "Total Bilirubin",
+    "Direct Bilirubin",
+    "Albumin",
+    "Total Protein"
+  ],
+  "units": {
+    "ALT": "U/L",
+    "AST": "U/L",
+    "ALP": "U/L",
+    "GGT": "U/L",
+    "Total Bilirubin": "mg/dL",
+    "Direct Bilirubin": "mg/dL",
+    "Albumin": "g/dL",
+    "Total Protein": "g/dL"
+  },
+  "classes": [
+    "Cholestasis pattern",
+    "Fatty liver pattern",
+    "Gilbert syndrome pattern",
+    "Hepatocellular injury pattern",
+    "Liver synthetic dysfunction pattern",
+    "Normal"
+  ],
+  "mean": [
+    48.8900032043457,
+    43.6816520690918,
+    109.1572036743164,
+    54.61920166015625,
+    1.2816470861434937,
+    0.43652471899986267,
+    4.099204063415527,
+    6.910280227661133
+  ],
+  "std": [
+    51.907012939453125,
+    45.04712677001953,
+    71.44271087646484,
+    50.1072998046875,
+    0.9714410901069641,
+    0.6053935885429382,
+    0.5647096633911133,
+    0.7766744494438171
+  ],
+  "target_mode": "multilabel_sigmoid",
+  "threshold": 0.5,
+  "training_source": "02_Hepatic_Function_Panel.csv",
+  "provenance": "Supplied synthetic/rule-derived CSV; NOT clinically validated",
+  "imputation_medians": [
+    28.549999237060547,
+    28.299999237060547,
+    88.9000015258789,
+    37.0,
+    0.9200000166893005,
+    0.1899999976158142,
+    4.190000057220459,
+    7.03000020980835
+  ]
+}

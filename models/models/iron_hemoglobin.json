@@ -1,0 +1,54 @@
+{
+  "model": "iron_hemoglobin",
+  "status": "trained_prototype",
+  "section": "Nutrition",
+  "features": [
+    "Ferritin",
+    "Transferrin Saturation",
+    "Serum Iron"
+  ],
+  "units": {
+    "Ferritin": "ng/mL",
+    "Transferrin Saturation": "%",
+    "Serum Iron": "µg/dL"
+  },
+  "classes": [
+    "Erythrocytosis pattern",
+    "Iron deficiency anemia pattern",
+    "Iron deficiency anemia pattern;Anemia of chronic disease pattern",
+    "Iron deficiency without anemia pattern",
+    "Iron overload pattern",
+    "Iron overload pattern;Erythrocytosis pattern",
+    "Normal"
+  ],
+  "mean": [
+    112.80585479736328,
+    27.608224868774414,
+    102.49092102050781
+  ],
+  "std": [
+    96.64183044433594,
+    12.970121383666992,
+    60.743614196777344
+  ],
+  "architecture": "Linear(n,32)->ReLU->Linear(32,32)->ReLU->Linear(32,k)",
+  "source_csv": "plan_datasets/Iron_Hemoglobin.csv",
+  "mapping": {
+    "Ferritin": {
+      "source": "Ferritin_ng_mL",
+      "multiply_by": 1
+    },
+    "Transferrin Saturation": {
+      "source": "Transferrin_Saturation_pct",
+      "multiply_by": 1
+    },
+    "Serum Iron": {
+      "source": "Serum_Iron_ug_dL",
+      "multiply_by": 1
+    }
+  },
+  "training_rows": 6756,
+  "held_out_rows": 1689,
+  "held_out_accuracy_on_supplied_labels": 0.7720544701006513,
+  "limitations": "Original datasets are synthetic or rule-labeled; held-out score is NOT clinical validation. Features are a subset of the Excel section, exactly the inputs used by this specialist."
+}

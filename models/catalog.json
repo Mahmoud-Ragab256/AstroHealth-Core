@@ -1,0 +1,223 @@
+{
+  "heart_vitals": {
+    "status": "TRAINED_PROTOTYPE",
+    "section": "Dashboard",
+    "features": [
+      "Heart Rate",
+      "Systolic Blood Pressure",
+      "Diastolic Blood Pressure",
+      "SpO₂",
+      "Respiratory Rate",
+      "Body Temperature"
+    ],
+    "model_path": "models/heart_vitals.pth"
+  },
+  "bone_health": {
+    "status": "TRAINED_PROTOTYPE",
+    "section": "Gravity",
+    "features": [
+      "BMD T-score",
+      "Bone Density Change",
+      "Calcium",
+      "Vitamin D (25-OH)",
+      "P1NP",
+      "CTX-I",
+      "Osteocalcin"
+    ],
+    "model_path": "models/bone_health.pth"
+  },
+  "muscle_balance": {
+    "status": "TRAINED_PROTOTYPE",
+    "section": "Gravity",
+    "features": [
+      "Muscle Mass",
+      "Muscle Strength",
+      "Muscle Loss",
+      "Balance Score",
+      "Physical Performance",
+      "Orthostatic Tolerance"
+    ],
+    "model_path": "models/muscle_balance.pth"
+  },
+  "iron_hemoglobin": {
+    "status": "TRAINED_PROTOTYPE",
+    "section": "Nutrition",
+    "features": [
+      "Ferritin",
+      "Transferrin Saturation",
+      "Serum Iron"
+    ],
+    "model_path": "models/iron_hemoglobin.pth"
+  },
+  "hydration": {
+    "status": "TRAINED_PROTOTYPE",
+    "section": "Nutrition",
+    "features": [
+      "Urine Specific Gravity"
+    ],
+    "model_path": "models/hydration.pth"
+  },
+  "immune_system": {
+    "status": "TRAINED_PROTOTYPE",
+    "section": "Radiation",
+    "features": [
+      "WBC"
+    ],
+    "model_path": "models/immune_system.pth"
+  },
+  "radiation_biodosimetry": {
+    "status": "TRAINED_PROTOTYPE",
+    "section": "Radiation",
+    "features": [
+      "γ-H2AX",
+      "Micronucleus Assay"
+    ],
+    "model_path": "models/radiation_biodosimetry.pth"
+  },
+  "liver": {
+    "status": "TRAINED_PROTOTYPE",
+    "section": "Liver Function",
+    "features": [
+      "ALT",
+      "AST",
+      "ALP",
+      "GGT",
+      "Total Bilirubin",
+      "Direct Bilirubin",
+      "Albumin",
+      "Total Protein"
+    ],
+    "model_path": "models/liver.pth"
+  },
+  "ecg": {
+    "status": "BLOCKED_MISSING_EXCEL_INPUTS",
+    "reason": "Excel has ECG as a Signal but the supplied ECG datasets contain extracted intervals rather than raw waveform samples. Synthetic ECG signals would be misleading.",
+    "needed_excel_features": [
+      "ECG waveform schema (lead, sampling frequency, waveform samples)"
+    ]
+  },
+  "lipid_panel": {
+    "status": "BLOCKED_MISSING_EXCEL_INPUTS",
+    "reason": "Total cholesterol, LDL, HDL and triglycerides are not in the Excel measurement plan.",
+    "needed_excel_features": [
+      "Total Cholesterol",
+      "LDL",
+      "HDL",
+      "Triglycerides"
+    ]
+  },
+  "toxins": {
+    "status": "BLOCKED_MISSING_EXCEL_INPUTS",
+    "reason": "Heavy-metal/co-oximetry analytes are not in the Excel measurement plan.",
+    "needed_excel_features": [
+      "Lead",
+      "Mercury",
+      "Cadmium",
+      "Carboxyhemoglobin",
+      "Methemoglobin"
+    ]
+  },
+  "cardiovascular": {
+    "status": "TRAINED_PROTOTYPE",
+    "section": "Dashboard",
+    "features": [
+      "Heart Rate",
+      "Systolic Blood Pressure",
+      "Diastolic Blood Pressure",
+      "HRV",
+      "Fasting Blood Glucose"
+    ],
+    "model_path": "models/cardiovascular.pth"
+  },
+  "radiation_exposure": {
+    "status": "TRAINED_PROTOTYPE",
+    "section": "Radiation",
+    "features": [
+      "Absorbed Dose",
+      "Cumulative Radiation Dose"
+    ],
+    "model_path": "models/radiation_exposure.pth"
+  },
+  "respiration": {
+    "status": "TRAINED_PROTOTYPE",
+    "section": "Respiration",
+    "features": [
+      "PaO₂",
+      "PaCO₂",
+      "Blood pH"
+    ],
+    "model_path": "models/respiration.pth"
+  },
+  "nutrition_monitor": {
+    "status": "TRAINED_PROTOTYPE",
+    "section": "Nutrition",
+    "features": [
+      "Protein Intake",
+      "Ferritin",
+      "Transferrin Saturation",
+      "Serum Iron",
+      "Vitamin K",
+      "Omega-3",
+      "Hydration Score",
+      "Urine Specific Gravity",
+      "Urine Volume",
+      "Body Weight"
+    ],
+    "model_path": "models/nutrition_monitor.pth"
+  },
+  "altered_gravity": {
+    "status": "TRAINED_PROTOTYPE",
+    "section": "Gravity",
+    "features": [
+      "Muscle Mass",
+      "Muscle Strength",
+      "Muscle Loss",
+      "Balance Score",
+      "Physical Performance",
+      "Orthostatic Tolerance"
+    ],
+    "model_path": "models/altered_gravity.pth"
+  },
+  "sleep_quality": {
+    "status": "TRAINED_PROTOTYPE",
+    "section": "Psychological",
+    "features": [
+      "Sleep Duration",
+      "Sleep Efficiency",
+      "Sleep Latency",
+      "Awakenings"
+    ],
+    "model_path": "models/sleep_quality.pth"
+  },
+  "kidney_bmp": {
+    "status": "TRAINED_PROTOTYPE",
+    "section": "Kidney BMP",
+    "features": [
+      "Sodium",
+      "Potassium",
+      "Chloride",
+      "Bicarbonate",
+      "BUN",
+      "Creatinine",
+      "eGFR",
+      "Glucose",
+      "Calcium (BMP)"
+    ],
+    "model_path": "models/kidney_bmp.pth"
+  },
+  "kidney_urinalysis": {
+    "status": "TRAINED_PROTOTYPE",
+    "section": "Kidney Urinalysis",
+    "features": [
+      "Urine pH",
+      "Urine Specific Gravity (Urinalysis)",
+      "Urine Protein",
+      "Urine Glucose",
+      "Urine Ketones",
+      "Urine Blood Present",
+      "Urine Leukocyte Esterase",
+      "Urine Nitrite"
+    ],
+    "model_path": "models/kidney_urinalysis.pth"
+  }
+}

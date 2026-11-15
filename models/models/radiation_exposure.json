@@ -1,0 +1,57 @@
+{
+  "model": "radiation_exposure",
+  "status": "trained_prototype",
+  "section": "Radiation",
+  "features": [
+    "Absorbed Dose",
+    "Cumulative Radiation Dose"
+  ],
+  "units": {
+    "Absorbed Dose": "Gy",
+    "Cumulative Radiation Dose": "Sv"
+  },
+  "classes": [
+    "Elevated DNA damage marker pattern",
+    "Elevated DNA damage marker pattern;Radiation-induced lymphopenia pattern",
+    "Elevated daily dose rate pattern",
+    "Elevated daily dose rate pattern;Elevated DNA damage marker pattern",
+    "Elevated daily dose rate pattern;Radiation-induced lymphopenia pattern",
+    "High cumulative radiation pattern",
+    "High cumulative radiation pattern;Elevated DNA damage marker pattern",
+    "High cumulative radiation pattern;Elevated daily dose rate pattern",
+    "High cumulative radiation pattern;Radiation-induced lymphopenia pattern",
+    "High cumulative radiation pattern;Solar particle event exposure pattern",
+    "High cumulative radiation pattern;Solar particle event exposure pattern;Elevated daily dose rate pattern;Elevated DNA damage marker pattern;Radiation-induced lymphopenia pattern",
+    "Normal",
+    "Radiation-induced lymphopenia pattern",
+    "Solar particle event exposure pattern",
+    "Solar particle event exposure pattern;Elevated DNA damage marker pattern",
+    "Solar particle event exposure pattern;Elevated daily dose rate pattern",
+    "Solar particle event exposure pattern;Radiation-induced lymphopenia pattern"
+  ],
+  "mean": [
+    0.3647063672542572,
+    0.3691612780094147
+  ],
+  "std": [
+    0.23662348091602325,
+    0.23053695261478424
+  ],
+  "architecture": "Linear(n,32)->ReLU->Linear(32,32)->ReLU->Linear(32,k)",
+  "source_csv": "plan_datasets/Radiation.csv",
+  "training_rows": 6895,
+  "held_out_rows": 1724,
+  "held_out_accuracy_on_supplied_labels": 0.521461716937355,
+  "label_provenance": "Disease_Labels from the existing Radiation.csv; some original rules may use additional columns that are not model inputs.",
+  "limitations": "Prototype only; labels are synthetic, rule-derived or generated; no clinical, astronaut-flight, or radiation operational validation. Input features must match declared Excel subset exactly.",
+  "source_column_mapping": {
+    "Absorbed Dose": {
+      "source": "Whole_Body_Absorbed_Dose_Gy",
+      "multiply_by": 1.0
+    },
+    "Cumulative Radiation Dose": {
+      "source": "Cumulative_Radiation_Dose_mSv",
+      "multiply_by": 0.001
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "model": "altered_gravity",
+  "status": "trained_prototype",
+  "section": "Gravity",
+  "features": [
+    "Muscle Mass",
+    "Muscle Strength",
+    "Muscle Loss",
+    "Balance Score",
+    "Physical Performance",
+    "Orthostatic Tolerance"
+  ],
+  "units": {
+    "Muscle Mass": "relative to baseline",
+    "Muscle Strength": "relative to baseline",
+    "Muscle Loss": "%",
+    "Balance Score": "%",
+    "Physical Performance": "%",
+    "Orthostatic Tolerance": "seconds"
+  },
+  "classes": [
+    "Accelerated bone loss pattern",
+    "High bone turnover pattern",
+    "Hypercalcemia",
+    "Hypocalcemia",
+    "Low bone mass pattern",
+    "Normal",
+    "Osteoporosis-range bone density pattern",
+    "Vitamin D deficiency"
+  ],
+  "mean": [
+    -3.222444772720337,
+    -7.407666206359863,
+    3.092273473739624,
+    72.21424102783203,
+    72.48615264892578,
+    134.37384033203125
+  ],
+  "std": [
+    5.058515548706055,
+    9.232959747314453,
+    2.0754740238189697,
+    16.46174430847168,
+    16.220951080322266,
+    65.380615234375
+  ],
+  "architecture": "Linear(n,32)->ReLU->Linear(32,32)->ReLU->Linear(32,k)",
+  "source_csv": "training_data_strict/gravity_synthetic_mixed.csv",
+  "training_rows": 1760,
+  "held_out_rows": 440,
+  "held_out_accuracy_on_supplied_labels": 0.40454545454545454,
+  "label_provenance": "Synthetic joined Gravity labels, not independently verified altered-gravity adaptation labels.",
+  "limitations": "Prototype only; labels are synthetic, rule-derived or generated; no clinical, astronaut-flight, or radiation operational validation. Input features must match declared Excel subset exactly."
+}

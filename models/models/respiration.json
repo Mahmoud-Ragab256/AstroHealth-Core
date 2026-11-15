@@ -1,0 +1,69 @@
+{
+  "model": "respiration",
+  "status": "trained_prototype",
+  "section": "Respiration",
+  "features": [
+    "PaO₂",
+    "PaCO₂",
+    "Blood pH"
+  ],
+  "units": {
+    "PaO₂": "mmHg",
+    "PaCO₂": "mmHg",
+    "Blood pH": "pH"
+  },
+  "classes": [
+    "Acidosis pattern",
+    "Acidosis pattern;Elevated lactate pattern",
+    "Acidosis pattern;Hypercapnia pattern",
+    "Acidosis pattern;Hypercapnia pattern;Elevated lactate pattern",
+    "Acidosis pattern;Hypoxemia pattern",
+    "Acidosis pattern;Hypoxemia pattern;Elevated lactate pattern",
+    "Acidosis pattern;Hypoxemia pattern;Hypercapnia pattern",
+    "Acidosis pattern;Hypoxemia pattern;Hypercapnia pattern;Elevated lactate pattern",
+    "Alkalosis pattern",
+    "Alkalosis pattern;Elevated lactate pattern",
+    "Alkalosis pattern;Hypercapnia pattern",
+    "Alkalosis pattern;Hypoxemia pattern",
+    "Alkalosis pattern;Hypoxemia pattern;Hypercapnia pattern;Elevated lactate pattern",
+    "Elevated lactate pattern",
+    "Hypercapnia pattern",
+    "Hypercapnia pattern;Elevated lactate pattern",
+    "Hypoxemia pattern",
+    "Hypoxemia pattern;Elevated lactate pattern",
+    "Hypoxemia pattern;Hypercapnia pattern",
+    "Hypoxemia pattern;Hypercapnia pattern;Elevated lactate pattern",
+    "Normal"
+  ],
+  "mean": [
+    87.77336883544922,
+    41.877845764160156,
+    7.383347511291504
+  ],
+  "std": [
+    9.338683128356934,
+    5.517137050628662,
+    0.06628231704235077
+  ],
+  "architecture": "Linear(n,32)->ReLU->Linear(32,32)->ReLU->Linear(32,k)",
+  "source_csv": "plan_datasets/Blood_Gas.csv",
+  "training_rows": 6753,
+  "held_out_rows": 1689,
+  "held_out_accuracy_on_supplied_labels": 0.8709295441089402,
+  "label_provenance": "Disease_Labels from Blood_Gas.csv. Model uses only the three respiration fields in Excel, not the other source columns.",
+  "limitations": "Prototype only; labels are synthetic, rule-derived or generated; no clinical, astronaut-flight, or radiation operational validation. Input features must match declared Excel subset exactly.",
+  "source_column_mapping": {
+    "PaO₂": {
+      "source": "PaO2_mmHg",
+      "multiply_by": 1.0
+    },
+    "PaCO₂": {
+      "source": "PaCO2_mmHg",
+      "multiply_by": 1.0
+    },
+    "Blood pH": {
+      "source": "Blood_pH",
+      "multiply_by": 1.0
+    }
+  }
+}

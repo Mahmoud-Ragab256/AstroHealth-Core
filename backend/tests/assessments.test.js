@@ -111,6 +111,18 @@ test('database failure does not return a successful report', async t => {
   assert.equal(res.payload.report, undefined);
 });
 
+test('model input errors return actionable 422 without saving', async t => {
+  t.mock.method(globalThis, 'fetch', async () => ({ ok: false, status: 422, json: async () => ({
+    message: 'Insufficient measurements',
+    skipped_models: [{ model: 'respiration', missing_fields: ['paco2', 'blood_ph'] }]
+  }) }));
+  const save = t.mock.method(Report, 'create', async () => { throw new Error('Unexpected save'); });
+  const res = await invoke(endpoints.respiration, { ...identity, pao2: 80 });
+  assert.equal(res.code, 422);
+  assert.match(res.payload.message, /paco2, blood_ph/);
+  assert.equal(save.mock.callCount(), 0);
+});
+
 test('legacy reports still require their interpreted fields', async () => {
   const report = new Report({
     assessment: { name: 'Legacy', type: 'Routine', date: new Date() },

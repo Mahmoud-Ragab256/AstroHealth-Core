@@ -1,0 +1,127 @@
+{
+  "model": "heart_vitals",
+  "status": "trained_prototype",
+  "section": "Dashboard",
+  "features": [
+    "Heart Rate",
+    "Systolic Blood Pressure",
+    "Diastolic Blood Pressure",
+    "SpO₂",
+    "Respiratory Rate",
+    "Body Temperature"
+  ],
+  "units": {
+    "Heart Rate": "BPM",
+    "Systolic Blood Pressure": "mmHg",
+    "Diastolic Blood Pressure": "mmHg",
+    "SpO₂": "%",
+    "Respiratory Rate": "breaths/min",
+    "Body Temperature": "°C"
+  },
+  "classes": [
+    "Bradycardia",
+    "Bradycardia;Bradypnea",
+    "Bradycardia;Fever",
+    "Bradycardia;Fever;Bradypnea",
+    "Bradycardia;Fever;Tachypnea",
+    "Bradycardia;Hypothermia",
+    "Bradycardia;Hypothermia;Bradypnea",
+    "Bradycardia;Hypothermia;Tachypnea",
+    "Bradycardia;Hypoxemia",
+    "Bradycardia;Hypoxemia;Bradypnea",
+    "Bradycardia;Hypoxemia;Tachypnea",
+    "Bradycardia;Tachypnea",
+    "Bradypnea",
+    "Fever",
+    "Fever;Bradypnea",
+    "Fever;Tachypnea",
+    "Hypertension",
+    "Hypertension;Bradycardia",
+    "Hypertension;Bradycardia;Bradypnea",
+    "Hypertension;Bradycardia;Tachypnea",
+    "Hypertension;Bradypnea",
+    "Hypertension;Tachycardia",
+    "Hypertension;Tachycardia;Bradypnea",
+    "Hypertension;Tachycardia;Tachypnea",
+    "Hypertension;Tachypnea",
+    "Hypotension",
+    "Hypotension;Bradycardia",
+    "Hypotension;Bradycardia;Bradypnea",
+    "Hypotension;Bradycardia;Hypoxemia;Hypothermia;Bradypnea",
+    "Hypotension;Bradycardia;Tachypnea",
+    "Hypotension;Bradypnea",
+    "Hypotension;Tachycardia",
+    "Hypotension;Tachycardia;Bradypnea",
+    "Hypotension;Tachycardia;Tachypnea",
+    "Hypotension;Tachypnea",
+    "Hypothermia",
+    "Hypothermia;Bradypnea",
+    "Hypothermia;Tachypnea",
+    "Hypoxemia",
+    "Hypoxemia;Bradypnea",
+    "Hypoxemia;Fever;Tachypnea",
+    "Hypoxemia;Tachypnea",
+    "Normal",
+    "Tachycardia",
+    "Tachycardia;Bradypnea",
+    "Tachycardia;Fever",
+    "Tachycardia;Fever;Bradypnea",
+    "Tachycardia;Fever;Tachypnea",
+    "Tachycardia;Hypothermia",
+    "Tachycardia;Hypothermia;Bradypnea",
+    "Tachycardia;Hypothermia;Tachypnea",
+    "Tachycardia;Hypoxemia",
+    "Tachycardia;Hypoxemia;Bradypnea",
+    "Tachycardia;Hypoxemia;Tachypnea",
+    "Tachycardia;Tachypnea",
+    "Tachypnea"
+  ],
+  "mean": [
+    86.90910339355469,
+    116.81218719482422,
+    74.0815658569336,
+    95.61791229248047,
+    18.76166534423828,
+    37.064395904541016
+  ],
+  "std": [
+    29.14438247680664,
+    20.382801055908203,
+    13.372346878051758,
+    5.914876937866211,
+    8.352386474609375,
+    1.1446853876113892
+  ],
+  "architecture": "Linear(n,32)->ReLU->Linear(32,32)->ReLU->Linear(32,k)",
+  "source_csv": "plan_datasets/Vital_Signs.csv",
+  "mapping": {
+    "Heart Rate": {
+      "source": "Heart_Rate_bpm",
+      "multiply_by": 1
+    },
+    "Systolic Blood Pressure": {
+      "source": "Systolic_BP_mmHg",
+      "multiply_by": 1
+    },
+    "Diastolic Blood Pressure": {
+      "source": "Diastolic_BP_mmHg",
+      "multiply_by": 1
+    },
+    "SpO₂": {
+      "source": "SpO2_pct",
+      "multiply_by": 1
+    },
+    "Respiratory Rate": {
+      "source": "Respiratory_Rate_bpm",
+      "multiply_by": 1
+    },
+    "Body Temperature": {
+      "source": "Body_Temp_C",
+      "multiply_by": 1
+    }
+  },
+  "training_rows": 6360,
+  "held_out_rows": 1590,
+  "held_out_accuracy_on_supplied_labels": 0.9471698113207547,
+  "limitations": "Original datasets are synthetic or rule-labeled; held-out score is NOT clinical validation. Features are a subset of the Excel section, exactly the inputs used by this specialist."
+}

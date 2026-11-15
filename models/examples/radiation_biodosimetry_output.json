@@ -1,0 +1,13 @@
+{
+  "model": "radiation_biodosimetry",
+  "status": "PREDICTED_PROTOTYPE",
+  "measurements": {
+    "γ-H2AX": 0.10999999940395355,
+    "Micronucleus Assay": 2.4000000953674316
+  },
+  "predicted_labels": [
+    "Normal"
+  ],
+  "model_score_not_clinical_probability": 0.9994373917579651,
+  "limitations": "Prototype trained on supplied synthetic/rule-labeled data; not clinically validated"
+}
